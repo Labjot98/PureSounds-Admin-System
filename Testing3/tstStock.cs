@@ -12,7 +12,7 @@ namespace Testing3
         {
 
             //create an instance of the class we are testing
-            clsStock aStock = new clsStock();
+            clsStock1 aStock = new clsStock1();
 
             //test to see if it exists
             Assert.IsNotNull(aStock);
