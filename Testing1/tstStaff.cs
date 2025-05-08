@@ -120,7 +120,7 @@ namespace Testing1
             //create a Boolean variable to store the results of the validation
             Boolean Found = false;
             //create some test data to use with the method
-            Int32 StaffID = 21;
+            Int32 StaffID = 5;
             //invoke the method
             Found = AStaff.Find(StaffID);
             //test to see if the result is true
@@ -139,11 +139,11 @@ namespace Testing1
             // create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            Int32 StaffID = 21;
+            Int32 StaffID = 5;
             // invoke the method
             Found = AStaff.Find(StaffID);
             // check the StaffID
-            if (AStaff.StaffID !=21)
+            if (AStaff.StaffID !=5)
             {
                 OK = false;
             }
@@ -161,11 +161,11 @@ namespace Testing1
             // create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            Int32 StaffId = 21;
+            Int32 StaffId = 5;
             // invoke the method
             Found = AStaff.Find(StaffId);
             // check the Name
-            if (AStaff.Name != "Orson Welles")
+            if (AStaff.Name != "Walter Pigeon")
             {
                 OK = false;
             }
@@ -183,11 +183,11 @@ namespace Testing1
             // create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            Int32 StaffID = 21;
+            Int32 StaffID = 5;
             // invoke the method
             Found = AStaff.Find(StaffID);
             // check the DateJoined
-            if (AStaff.DateJoined != Convert.ToDateTime("08/05/2025"))
+            if (AStaff.DateJoined != Convert.ToDateTime("05/05/1961"))
             {
                 OK = false;
             }
@@ -205,12 +205,12 @@ namespace Testing1
             // create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            Int32 StaffID = 21;
+            Int32 StaffID = 5;
             // invoke the method
             Found = AStaff.Find(StaffID);
             // check the DateJoined
-            if (AStaff.DateLeft != Convert.ToDateTime("08/05/2026"))
-            {
+            if (AStaff.DateLeft != Convert.ToDateTime("05/05/1962"))
+                        {
                 OK = false;
             }
             // test to see that the result is correct
@@ -227,7 +227,7 @@ namespace Testing1
             // create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            Int32 StaffID = 21;
+            Int32 StaffID = 5;
             // invoke the method
             Found = AStaff.Find(StaffID);
             // check the Name
@@ -249,11 +249,11 @@ namespace Testing1
             // create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            Int32 StaffID = 21;
+            Int32 StaffID = 5;
             // invoke the method
             Found = AStaff.Find(StaffID);
             // check the Name
-            if (AStaff.NINumber != "NH123456B")
+            if (AStaff.NINumber != "GH123456V")
             {
                 OK = false;
             }
@@ -271,11 +271,11 @@ namespace Testing1
             // create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            Int32 StaffID = 21;
+            Int32 StaffID = 5;
             // invoke the method
             Found = AStaff.Find(StaffID);
             // check the Name
-            if (AStaff.IsFemale != true)
+            if (AStaff.IsFemale != false)
             {
                 OK = false;
             }

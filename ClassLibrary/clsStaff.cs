@@ -127,16 +127,33 @@ namespace ClassLibrary
         /******************FIND METHOD**********************************/
         public bool Find(int StaffID)
         {
-            // set the private data member to the test data value
-            mStaffID = 21;
-            mName = "Orson Welles";
-            mDateJoined = Convert.ToDateTime("08/05/2025");
-            mDateLeft = Convert.ToDateTime("08/05/2026");
-            mRank = "Salesperson";
-            mNINumber = "NH123456B";
-            mIsFemale = true;
-            // return always true
-            return true;
+            // create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            // add the parameter for the staff id to search for
+            DB.AddParameter("@StaffID", StaffID);
+            // execute the stored procedure
+            DB.Execute("sproc_tblStaff_FilterByStaffID");
+            // if one record is found (there should be either one or zero)
+            if (DB.Count == 1)
+            {
+                // copy the data from the database to the private data members
+                mStaffID = Convert.ToInt32(DB.DataTable.Rows[0]["StaffID"]);
+                mName = Convert.ToString(DB.DataTable.Rows[0]["Name"]);
+                mDateJoined = Convert.ToDateTime(DB.DataTable.Rows[0]["DateJoined"]);
+                mDateLeft = Convert.ToDateTime(DB.DataTable.Rows[0]["DateLeft"]);
+                mRank = Convert.ToString(DB.DataTable.Rows[0]["Rank"]);
+                mNINumber = Convert.ToString(DB.DataTable.Rows[0]["NINumber"]);
+                mIsFemale = Convert.ToBoolean(DB.DataTable.Rows[0]["IsFemale"]);
+                // return that everything worked OK
+                return true;
+            }
+            // if no record was found
+            else
+            {
+
+                // return false indicating there is a problem
+                return false;
+            }
         }
     }
 }
