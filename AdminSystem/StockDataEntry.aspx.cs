@@ -38,4 +38,29 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //navigate to the view page
         Response.Redirect("StockViewer.aspx");
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create new instance of cls stock
+        clsStock1 aStock = new clsStock1();
+
+        Int32 ItemID;
+
+        Boolean Found = false;
+
+        ItemID = Convert.ToInt32(txtItemID.Text);
+
+        Found = aStock.Find(ItemID);
+
+        if (Found == true)
+        {
+            txtItemID.Text = aStock.ItemID.ToString();
+            txtItemName.Text = aStock.ItemName.ToString();
+            txtDatePosted.Text = aStock.DatePosted.ToString();
+            txtQuantity.Text = aStock.Quantity.ToString();
+            txtPrice.Text = aStock.Price.ToString();
+            txtBrand.Text = aStock.Brand.ToString();
+            chkBluetooth.Checked = aStock.Bluetooth;
+        }
+    }
 }
