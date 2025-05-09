@@ -109,5 +109,164 @@ namespace Testing3
             Assert.AreEqual(aStock.Brand, TestData);
         }
 
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            //create an instance of the class we want to test
+            clsStock1 aStock = new clsStock1();
+            //create a boolean to store the result
+            Boolean Found = false;
+            //create test data to use with the method
+            int ItemID = 26;
+            //invoke the method
+            Found = aStock.Find(ItemID);
+            Assert.IsTrue(Found);
+        }
+
+        //property Data Tests
+
+        [TestMethod]
+        public void TestItemIDFound()
+        {
+            clsStock1 aStock = new clsStock1();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            int ItemID = 26;
+
+            Found = aStock.Find(ItemID);
+
+            if (aStock.ItemID != 26)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestItemNameFound()
+        {
+            clsStock1 aStock = new clsStock1();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            int ItemID = 26;
+
+            Found = aStock.Find(ItemID);
+
+            if (aStock.ItemName != "bose soundflex")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDatePostedFound()
+        {
+            clsStock1 aStock = new clsStock1();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            int ItemID = 26;
+
+            Found = aStock.Find(ItemID);
+
+            if (aStock.DatePosted != Convert.ToDateTime("10/07/2022"))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestQuantityFound()
+        {
+            clsStock1 aStock = new clsStock1();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            int ItemID = 26;
+
+            Found = aStock.Find(ItemID);
+
+            if (aStock.Quantity != 40)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestBluetoothFound()
+        {
+            clsStock1 aStock = new clsStock1();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            int ItemID = 26;
+
+            Found = aStock.Find(ItemID);
+
+            if (aStock.Bluetooth != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPriceFound()
+        {
+            clsStock1 aStock = new clsStock1();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            int ItemID = 26;
+
+            Found = aStock.Find(ItemID);
+
+            if (aStock.Price != 29.99m)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+
+
+        [TestMethod]
+        public void TestBrandFound()
+        {
+            clsStock1 aStock = new clsStock1();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            int ItemID = 26;
+
+            Found = aStock.Find(ItemID);
+
+            if (aStock.Brand != "bose")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
     }
+
+    
 }
