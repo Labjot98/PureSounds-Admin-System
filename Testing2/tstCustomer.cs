@@ -139,7 +139,7 @@ namespace Testing2
             Boolean Found = false;
 
             //create some test data to use with the method
-            Int32 CustomerId = 1;
+            Int32 CustomerId = 8;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
@@ -161,13 +161,13 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 10;
+            Int32 CustomerId = 8;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
             //check the address id
-            if (ACustomer.CustomerId != 10)
+            if (ACustomer.CustomerId != 8)
             {
                 OK = false;
             }
@@ -190,13 +190,13 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 10;
+            Int32 CustomerId =8;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
             //check the customer fullname
-            if (ACustomer.CustomerFullname != "Tim David")
+            if (ACustomer.CustomerFullname != "Jos Buttler")
             {
                 OK = false;
             }
@@ -218,13 +218,13 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 10;
+            Int32 CustomerId = 8;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
             //check the customer email
-            if (ACustomer.Email != "timdavid@gmail.com")
+            if (ACustomer.Email != "jos.buttler@gmail.com")
             {
                 OK = false;
             }
@@ -246,13 +246,13 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 10;
+            Int32 CustomerId = 8;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
             //check the customer email
-            if (ACustomer.Address != "Test Address")
+            if (ACustomer.Address != "202 Wand Lane, Manchester, UK")
             {
                 OK = false;
             }
@@ -274,13 +274,13 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 10;
+            Int32 CustomerId = 8;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
             //check the customer email
-            if (ACustomer.Password != "Test Password")
+            if (ACustomer.Password != "buttler12345")
             {
                 OK = false;
             }
@@ -302,13 +302,13 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 10;
+            Int32 CustomerId = 8;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
             //check the customer email
-            if (ACustomer.BonusEligibility != true)
+            if (ACustomer.BonusEligibility != false)
             {
                 OK = false;
             }
@@ -330,13 +330,13 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 10;
+            Int32 CustomerId = 8;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
             //check the customer email
-            if (ACustomer.CreatedOn != Convert.ToDateTime("08/05/2025"))
+            if (ACustomer.CreatedOn != Convert.ToDateTime("07/05/2025"))
             {
                 OK = false;
             }
