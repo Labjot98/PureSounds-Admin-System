@@ -117,7 +117,7 @@ namespace Testing3
             //create a boolean to store the result
             Boolean Found = false;
             //create test data to use with the method
-            int ItemID = 26;
+            int ItemID = 4;
             //invoke the method
             Found = aStock.Find(ItemID);
             Assert.IsTrue(Found);
@@ -134,11 +134,11 @@ namespace Testing3
 
             Boolean OK = true;
 
-            int ItemID = 26;
+            int ItemID = 4;
 
             Found = aStock.Find(ItemID);
 
-            if (aStock.ItemID != 26)
+            if (aStock.ItemID != 4)
             {
                 OK = false;
             }
@@ -154,11 +154,11 @@ namespace Testing3
 
             Boolean OK = true;
 
-            int ItemID = 26;
+            int ItemID = 4;
 
             Found = aStock.Find(ItemID);
 
-            if (aStock.ItemName != "bose soundflex")
+            if (aStock.ItemName != "WaveBoom")
             {
                 OK = false;
             }
@@ -174,11 +174,11 @@ namespace Testing3
 
             Boolean OK = true;
 
-            int ItemID = 26;
+            int ItemID = 4;
 
             Found = aStock.Find(ItemID);
 
-            if (aStock.DatePosted != Convert.ToDateTime("10/07/2022"))
+            if (aStock.DatePosted != Convert.ToDateTime("06/04/2025"))
             {
                 OK = false;
             }
@@ -194,11 +194,11 @@ namespace Testing3
 
             Boolean OK = true;
 
-            int ItemID = 26;
+            int ItemID = 4;
 
             Found = aStock.Find(ItemID);
 
-            if (aStock.Quantity != 40)
+            if (aStock.Quantity != 30)
             {
                 OK = false;
             }
@@ -214,11 +214,11 @@ namespace Testing3
 
             Boolean OK = true;
 
-            int ItemID = 26;
+            int ItemID = 4;
 
             Found = aStock.Find(ItemID);
 
-            if (aStock.Bluetooth != true)
+            if (aStock.Bluetooth != false)
             {
                 OK = false;
             }
@@ -234,11 +234,11 @@ namespace Testing3
 
             Boolean OK = true;
 
-            int ItemID = 26;
+            int ItemID = 4;
 
             Found = aStock.Find(ItemID);
 
-            if (aStock.Price != 29.99m)
+            if (aStock.Price != 20m)
             {
                 OK = false;
             }
@@ -256,11 +256,11 @@ namespace Testing3
 
             Boolean OK = true;
 
-            int ItemID = 26;
+            int ItemID = 4;
 
             Found = aStock.Find(ItemID);
 
-            if (aStock.Brand != "bose")
+            if (aStock.Brand != "EcoSounds")
             {
                 OK = false;
             }

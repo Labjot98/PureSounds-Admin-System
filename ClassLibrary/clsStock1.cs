@@ -102,17 +102,30 @@ namespace ClassLibrary
             }
         }
 
-        public bool Find(int itemID)
+        public bool Find(int ItemID)
         {
-            mItemID = 26;
-            mItemName = "bose soundflex";
-            mDatePosted = Convert.ToDateTime("10/07/2022");
-            mQuantity = 40;
-            mBluetooth = true;
-            mPrice = 29.99m;
-            mBrand = "bose";
+            clsDataConnection DB = new clsDataConnection();
 
-            return true;
+            DB.AddParameter("@ItemID", ItemID);
+
+            DB.Execute("sproc_tblHeadphone_FilterByItemID");
+
+            if (DB.Count == 1)
+            {
+                mItemID = Convert.ToInt32(DB.DataTable.Rows[0]["ItemID"]);
+                mItemName = Convert.ToString(DB.DataTable.Rows[0]["ItemName"]);
+                mDatePosted = Convert.ToDateTime(DB.DataTable.Rows[0]["DatePosted"]);
+                mQuantity = Convert.ToInt32(DB.DataTable.Rows[0]["Quantity"]);
+                mBluetooth = Convert.ToBoolean(DB.DataTable.Rows[0]["Bluetooth"]);
+                mPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["Price"]);
+                mBrand = Convert.ToString(DB.DataTable.Rows[0]["Brand"]);
+
+                return true;
+            }
+          else
+            {
+                return false;
+            }
         }
     }
 
