@@ -13,6 +13,7 @@
 
         <asp:Label ID="lblCustomerId" runat="server" style="z-index: 1; left: 14px; top: 35px; position: absolute" Text="Customer ID"></asp:Label>
         <asp:TextBox ID="txtCustomerId" runat="server" style="z-index: 1; left: 160px; top: 35px; position: absolute; width: 220px"></asp:TextBox>
+        <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" style="z-index: 1; left: 420px; top: 32px; position: absolute; width: 60px" Text="Find" />
 
         <asp:Label ID="lblCustomerFullname" runat="server" style="z-index: 1; left: 14px; top: 70px; position: absolute" Text="Customer Fullname"></asp:Label>
         <asp:TextBox ID="txtCustomerFullname" runat="server" style="z-index: 1; left: 160px; top: 70px; position: absolute; width: 220px"></asp:TextBox>
