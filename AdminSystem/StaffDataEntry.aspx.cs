@@ -46,4 +46,29 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
 
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        // create an instance of the staff class
+        clsStaff AStaff = new clsStaff();
+        // create a variable to store the primary key
+        Int32 StaffID;
+        // create a variable to store the result of the find operation
+        Boolean Found = false;
+        //get the primary key entered by the user
+        StaffID = Convert.ToInt32(txtStaffID.Text);
+        // find the record
+        Found = AStaff.Find(StaffID);
+        // if found
+        if (Found == true)
+        {
+            // display the values of the property in the form
+            txtName.Text = AStaff.Name;
+            txtDateJoined.Text = AStaff.DateJoined.ToString();
+            txtDateLeft.Text = AStaff.DateLeft.ToString();
+            txtRank.Text = AStaff.Rank;
+            txtNINumber.Text = AStaff.NINumber.ToString();
+            chkIsFemale.Checked = AStaff.IsFemale;
+        }
+    }
 }
