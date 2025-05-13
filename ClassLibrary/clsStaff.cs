@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Management.Instrumentation;
 
 namespace ClassLibrary
@@ -154,6 +155,54 @@ namespace ClassLibrary
                 // return false indicating there is a problem
                 return false;
             }
+        }
+
+        public string Valid(string name, string dateJoined, string dateLeft, string rank, string nINumber)
+        {
+            // create a string variable to store the error
+            String Error = "";
+            // create a temporary variable to store the date values
+            DateTime DateTemp;
+            // if the Name is blank 
+            if (name.Length == 0)
+            {
+                // record the error
+                Error = Error + "The name may not be blank : ";
+            }
+            // if the name is greater than 50 characters
+            if (name.Length > 50)
+            {
+                // record the error
+                Error = Error + "The name may not be less than 51 character : ";
+            }
+
+            // create an instance of DateTime to compare with DateTemp
+            // in the if statements
+            DateTime DateComp = DateTime.Now.Date;
+
+            try
+            {
+                // copy the DateJoined value to the DateTemp variable
+                DateTemp = Convert.ToDateTime(dateJoined);
+                
+                if (DateTemp < DateComp)  // compare dateJoined with Date
+                {
+                    // record the error
+                    Error = Error + "The date cannot be in the past : ";
+                }
+                // check to see if the date is greater than today's date
+                if (DateTemp > DateComp)
+                {
+                    Error = Error + "The date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                // record the error
+                Error = Error + "The date was not a valid date : ";
+            }
+            // return any error messages
+            return Error;
         }
     }
 }
