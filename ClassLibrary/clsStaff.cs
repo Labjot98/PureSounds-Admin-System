@@ -157,12 +157,15 @@ namespace ClassLibrary
             }
         }
 
+        /*******************VALID METHOD************************/
         public string Valid(string name, string dateJoined, string dateLeft, string rank, string nINumber)
         {
             // create a string variable to store the error
             String Error = "";
             // create a temporary variable to store the date values
             DateTime DateTemp;
+
+            /************* Validate the Name property ***************/
             // if the Name is blank 
             if (name.Length == 0)
             {
@@ -173,13 +176,13 @@ namespace ClassLibrary
             if (name.Length > 50)
             {
                 // record the error
-                Error = Error + "The name may not be less than 51 character : ";
+                Error = Error + "The name must be less than 51 characters : ";
             }
 
+            /************* Validate the DateJoined property *******************/
             // create an instance of DateTime to compare with DateTemp
             // in the if statements
             DateTime DateComp = DateTime.Now.Date;
-
             try
             {
                 // copy the DateJoined value to the DateTemp variable
@@ -201,6 +204,64 @@ namespace ClassLibrary
                 // record the error
                 Error = Error + "The date was not a valid date : ";
             }
+
+            /************* Validate the DateLeft property *******************/
+            // create an instance of DateTime to compare with DateTemp
+            // in the if statements
+            try
+            {
+                // copy the DateLeft value to the DateTemp variable
+                DateTemp = Convert.ToDateTime(dateLeft);
+
+                if (DateTemp < DateComp)  // compare dateJoined with Date
+                {
+                    // record the error
+                    Error = Error + "The date cannot be in the past : ";
+                }
+                // check to see if the date is greater than today's date
+                if (DateTemp > DateComp)
+                {
+                    Error = Error + "The date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                // record the error
+                Error = Error + "The date was not a valid date : ";
+            }
+
+            /************* Validate the rank property ***************/
+            // if the rank is blank 
+            if (rank.Length == 0)
+            {
+                // record the error
+                Error = Error + "The rank may not be blank : ";
+            }
+            // if the rank is greater than 30 characters
+            if (rank.Length > 30)
+            {
+                // record the error
+                Error = Error + "The rank must be less than 1 characters : ";
+            }
+
+            /************* Validate the NI number property ***************/
+            // if the NI number is blank 
+            if (nINumber.Length == 0)
+            {
+                // record the error
+                Error = Error + "The NI number may not be blank : ";
+            }
+            // if the NI number is not exactlu 9 characters
+            if (nINumber.Length != 9)
+            {
+                // record the error
+                Error = Error + "The NI number must be exactly 9 characters : ";
+            }
+
+
+
+
+
             // return any error messages
             return Error;
         }

@@ -547,6 +547,330 @@ namespace Testing1
             // test to see that the result is correct
             Assert.AreNotEqual(Error, "");
         }
+        
+        [TestMethod]
+        public void DateLeftExtremeMin()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create a variable to store the test date data to pass
+            DateTime TestDate;
+            // set the date to today's date
+            TestDate = DateTime.Now.Date;
+            // change the date to whatever the date is less 100 years
+            TestDate = TestDate.AddYears(-100);
+            // convert the date variable to a string variable
+            string DateLeft = TestDate.ToString();
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateLeftMinLessOne()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create a variable to store the test date data to pass
+            DateTime TestDate;
+            // set the date to today's date
+            TestDate = DateTime.Now.Date;
+            // change the date to whatever the date is less 100 years
+            TestDate = TestDate.AddDays(-1);
+            // convert the date variable to a string variable
+            string DateLeft = TestDate.ToString();
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateLeftMin()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create a variable to store the test date data to pass
+            DateTime TestDate;
+            // set the date to today's date
+            TestDate = DateTime.Now.Date;
+            // convert the date variable to a string variable
+            string DateLeft = TestDate.ToString();
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void DateLeftMinPlusOne()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create a variable to store the test date data to pass
+            DateTime TestDate;
+            // set the date to today's date
+            TestDate = DateTime.Now.Date;
+            // change the date to whatever the date is less 100 years
+            TestDate = TestDate.AddDays(1);
+            // convert the date variable to a string variable
+            string DateLeft = TestDate.ToString();
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateLeftExtremeMax()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create a variable to store the test date data to pass
+            DateTime TestDate;
+            // set the date to today's date
+            TestDate = DateTime.Now.Date;
+            // change the date to whatever the date is less 100 years
+            TestDate = TestDate.AddYears(100);
+            // convert the date variable to a string variable
+            string DateLeft = TestDate.ToString();
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateLeftInvalidData()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // set the DateJoined to a non-date value
+            string DateLeft = "this is not a date!";
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        
+        [TestMethod]
+        public void RankMinLessOne()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string Rank = ""; // this should trigger an error
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void RankMin()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string Rank = "a"; // this should be okay
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void RankMinPlusOne()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string Rank = "aa"; // this should be okay
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void RankMaxMinusOne()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string Rank = "";
+            Rank = Rank.PadLeft(29, '*'); // this should be okay
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void RankMax()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string Rank = "";
+            Rank = Rank.PadLeft(30, '*'); // this should be okay
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void RankMid()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string Rank = "";
+            Rank = Rank.PadLeft(15, '*'); // this should be okay
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void RankMaxPlusOne()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string Rank = "";
+            Rank = Rank.PadLeft(31, '*'); // this should be okay
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void RankExtremeMax()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string Rank = "";
+            Rank = Rank.PadLeft(1000, '*'); // this should be fail
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        /////////////////////////////////////////
+
+
+        [TestMethod]
+        public void NINumberMinLessOne()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string NINumber = "12345678"; // this should trigger an error
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NINumberMin()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string NINumber = "AA123456A"; // this should be okay
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NINumberMinPlusOne()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string NINumber = "AA123456AA"; // this should fail
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NINumberMid()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string NINumber = "12345"; // just should fail
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NINumberExtremeMax()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string NINumber = "";
+            NINumber = NINumber.PadLeft(1000, '*'); // this should be fail
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
 
 
     }
