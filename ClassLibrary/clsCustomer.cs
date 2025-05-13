@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting;
 
 namespace ClassLibrary
 {
@@ -157,6 +158,29 @@ namespace ClassLibrary
                 //return false indicating there is a problem
                 return false;
             }
+        }
+
+        public string Valid(string customerFullname,  string email, string address, string password, string createdOn)
+        {
+            //create a variable to store the error
+            string Error = "";
+
+            //if CustomerFullname is blank
+            if(customerFullname.Length == 0)
+            {
+                Error = Error + "Customeer Full name cannot be blank: ";
+            }
+
+            //if CustomerFullname is greater than 100
+            if(customerFullname.Length > 100)
+            {
+                {
+                    Error = Error + "Customeer Full name must be less than 100 characters: ";
+                }
+            }
+
+            //return any error message
+            return Error;
         }
     }
 }
