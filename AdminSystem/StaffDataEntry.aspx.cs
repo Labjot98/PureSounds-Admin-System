@@ -24,27 +24,45 @@ public partial class _1_DataEntry : System.Web.UI.Page
         // create a new instance of clsStaff
         clsStaff AStaff = new clsStaff();
         // capture the StaffID
-        AStaff.StaffID = Convert.ToInt32(txtStaffID.Text);
+        // AStaff.StaffID = Convert.ToInt32(txtStaffID.Text); WE NO LONGER SEEM TO DO THIS FOR THE 'OKAY' BUTTON
         // capture the Name
-        AStaff.Name = txtName.Text;
+        string Name = txtName.Text;
         // capture the DateJoined
-        AStaff.DateJoined = Convert.ToDateTime(txtDateJoined.Text);
+        string DateJoined = txtDateJoined.Text;
         // capture the DateLeft
-        AStaff.DateLeft = Convert.ToDateTime(txtDateLeft.Text);
+        string DateLeft = txtDateLeft.Text;
         // capture the Rank
-        AStaff.Rank = txtRank.Text;
+        string Rank = txtRank.Text;
         // capture the NINumber
-        AStaff.NINumber = txtNINumber.Text;
+        string NINumber = txtNINumber.Text;
         // capture the IsFemale?
-        AStaff.IsFemale = chkIsFemale.Checked;
+        string IsFemale = chkIsFemale.Text;
+        string Error = "";
+        // validate the data
+        Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+        if (Error == "")
+        {
+            // capture the name
+            AStaff.Name = Name;
+            // capture the date joined
+            AStaff.DateJoined = Convert.ToDateTime(DateJoined);
+            // capture the date left
+            AStaff.DateLeft = Convert.ToDateTime(DateLeft);
+            // capture the rank
+            AStaff.Rank = Rank;
+            // capture the NI number
+            AStaff.NINumber = NINumber;
+            // store the staff member details in the session object
+            Session["AStaff"] = AStaff;
+            // navigate to the view page
+            Response.Redirect("StaffViewer.aspx");
+        }
 
-        // store the data in the session object
-        Session["AStaff"] = AStaff;
-        // navigate to the view page
-        Response.Redirect("StaffViewer.aspx");
-
-
-
+        else
+        {
+            // display the error message
+            lblError.Text = Error;
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)

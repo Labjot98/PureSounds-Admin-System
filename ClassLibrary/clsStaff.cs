@@ -191,18 +191,18 @@ namespace ClassLibrary
                 if (DateTemp < DateComp)  // compare dateJoined with Date
                 {
                     // record the error
-                    Error = Error + "The date cannot be in the past : ";
+                    Error = Error + "The date joined cannot be in the past : ";
                 }
                 // check to see if the date is greater than today's date
                 if (DateTemp > DateComp)
                 {
-                    Error = Error + "The date cannot be in the future : ";
+                    Error = Error + "The date joined cannot be in the future : ";
                 }
             }
             catch
             {
                 // record the error
-                Error = Error + "The date was not a valid date : ";
+                Error = Error + "The date joined is not a valid date : ";
             }
 
             /************* Validate the DateLeft property *******************/
@@ -216,18 +216,18 @@ namespace ClassLibrary
                 if (DateTemp < DateComp)  // compare dateJoined with Date
                 {
                     // record the error
-                    Error = Error + "The date cannot be in the past : ";
+                    Error = Error + "The date left cannot be in the past : ";
                 }
                 // check to see if the date is greater than today's date
                 if (DateTemp > DateComp)
                 {
-                    Error = Error + "The date cannot be in the future : ";
+                    Error = Error + "The date left cannot be in the future : ";
                 }
             }
             catch
             {
                 // record the error
-                Error = Error + "The date was not a valid date : ";
+                Error = Error + "The date left is not a valid date : ";
             }
 
             /************* Validate the rank property ***************/
@@ -241,7 +241,7 @@ namespace ClassLibrary
             if (rank.Length > 30)
             {
                 // record the error
-                Error = Error + "The rank must be less than 1 characters : ";
+                Error = Error + "The rank must be less than 31 characters : ";
             }
 
             /************* Validate the NI number property ***************/
