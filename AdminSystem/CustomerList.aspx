@@ -7,9 +7,13 @@
     <title></title>
 </head>
 <body>
+
     <form id="form1" runat="server">
         <div>
         </div>
+
+        <asp:ListBox runat="server" ID="lstCustomerList" Height="240px" Width="260px"></asp:ListBox>
     </form>
 </body>
 </html>
+
