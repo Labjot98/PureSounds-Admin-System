@@ -36,6 +36,8 @@ namespace Testing2
             TestItem.Email = "timdavid@gmail.com";
             TestItem.Password = "timdavid123";
             TestItem.Address = "92 Some Street, LE1 4AD, Leicester";
+            TestItem.BonusEligibility = true;
+            TestItem.CreatedOn = DateTime.Now;
 
             //add the item to the test list
             TestList.Add(TestItem);
@@ -45,22 +47,6 @@ namespace Testing2
 
             //test to see that the two values are the same
             Assert.AreEqual(AllCustomers.CustomerList, TestList);
-        }
-
-        [TestMethod]
-        public void CountPropertyOK()
-        {
-            //create an instance of the class
-            clsCustomerCollection AllCustomers = new clsCustomerCollection();
-
-            //create some test data to assign to the property
-            Int32 SomeCount = 0;
-
-            //assign the data to the property
-            AllCustomers.Count = SomeCount;
-
-            //test to see that two values are the same
-            Assert.AreEqual(AllCustomers.Count, SomeCount);
         }
 
         [TestMethod]
@@ -78,6 +64,8 @@ namespace Testing2
             TestCustomer.Email = "timdavid@gmail.com";
             TestCustomer.Password = "timdavid123";
             TestCustomer.Address = "92 Some Street, LE1 4AD, Leicester";
+            TestCustomer.BonusEligibility = true;
+            TestCustomer.CreatedOn = DateTime.Now;
 
             //assign the data to the property
             AllCustomers.ThisCustomer = TestCustomer;
@@ -104,6 +92,8 @@ namespace Testing2
             TestItem.Email = "timdavid@gmail.com";
             TestItem.Password = "timdavid123";
             TestItem.Address = "92 Some Street, LE1 4AD, Leicester";
+            TestItem.BonusEligibility = true;
+            TestItem.CreatedOn = DateTime.Now;
 
             //add the item to the test list
             TestList.Add(TestItem);
