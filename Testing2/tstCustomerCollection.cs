@@ -1,0 +1,118 @@
+﻿using System;
+using System.Collections.Generic;
+using ClassLibrary;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Testing2
+{
+    [TestClass]
+    public class tstCustomerCollection
+    {
+        [TestMethod]
+        public void InstanaceOK()
+        {
+            //create an instance of the class we want to create
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+
+            //test to see if it exists
+            Assert.IsNotNull(AllCustomers);
+        }
+
+        [TestMethod]
+        public void CustomerListOK()
+        {
+            //create an instance of the class
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+
+            //create some test data to assign to the property in this case data needs to a List of objects
+            List<clsCustomer> TestList = new List<clsCustomer>();
+
+            //Add the item to the list -> create the item of test data
+            clsCustomer TestItem = new clsCustomer();
+
+            //set its properties
+            TestItem.CustomerId = 1;
+            TestItem.CustomerFullname = "Tim David";
+            TestItem.Email = "timdavid@gmail.com";
+            TestItem.Password = "timdavid123";
+            TestItem.Address = "92 Some Street, LE1 4AD, Leicester";
+
+            //add the item to the test list
+            TestList.Add(TestItem);
+
+            //assign the data to the property
+            AllCustomers.CustomerList = TestList;
+
+            //test to see that the two values are the same
+            Assert.AreEqual(AllCustomers.CustomerList, TestList);
+        }
+
+        [TestMethod]
+        public void CountPropertyOK()
+        {
+            //create an instance of the class
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+
+            //create some test data to assign to the property
+            Int32 SomeCount = 0;
+
+            //assign the data to the property
+            AllCustomers.Count = SomeCount;
+
+            //test to see that two values are the same
+            Assert.AreEqual(AllCustomers.Count, SomeCount);
+        }
+
+        [TestMethod]
+        public void ThisCustomerPropertyOK()
+        {
+            //create an instance of the class
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+
+            //create some test data to assign to the property
+            clsCustomer TestCustomer = new clsCustomer();
+
+            //set the properties of the test Object;
+            TestCustomer.CustomerId = 1;
+            TestCustomer.CustomerFullname = "Tim David";
+            TestCustomer.Email = "timdavid@gmail.com";
+            TestCustomer.Password = "timdavid123";
+            TestCustomer.Address = "92 Some Street, LE1 4AD, Leicester";
+
+            //assign the data to the property
+            AllCustomers.ThisCustomer = TestCustomer;
+
+            //test to see that two values are the same
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestCustomer);
+        }
+
+        [TestMethod]
+        public void ListAndCountOK()
+        {
+            //create an instance of the class
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+
+            //create some test data to assign to the property in this case data needs to a List of objects
+            List<clsCustomer> TestList = new List<clsCustomer>();
+
+            //Add the item to the list -> create the item of test data
+            clsCustomer TestItem = new clsCustomer();
+
+            //set its properties
+            TestItem.CustomerId = 1;
+            TestItem.CustomerFullname = "Tim David";
+            TestItem.Email = "timdavid@gmail.com";
+            TestItem.Password = "timdavid123";
+            TestItem.Address = "92 Some Street, LE1 4AD, Leicester";
+
+            //add the item to the test list
+            TestList.Add(TestItem);
+
+            //assign the data to the property
+            AllCustomers.CustomerList = TestList;
+
+            //test to see that the two values are the same
+            Assert.AreEqual(AllCustomers.Count, TestList.Count);
+        }
+    }
+}
