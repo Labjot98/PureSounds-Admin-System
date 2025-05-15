@@ -17,32 +17,49 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create an instance of clsCustomer
         clsCustomer ACustomer = new clsCustomer();
 
-        //capture the customer id
-        ACustomer.CustomerId = Convert.ToInt32(txtCustomerId.Text);
+        //capture the data from the form
+        string CustomerId = txtCreatedOn.Text;
+        string CustomerFullname = txtCustomerFullname.Text;
+        string Email = txtEmail.Text;
+        string Address = txtAddress.Text; 
+        string Password = txtPassword.Text;
+        string BonusEligibility = chkBonusEligibility.Text;
+        string CreatedOn = txtCreatedOn.Text;
 
-        //capture the customer full name
-        ACustomer.CustomerFullname = txtCustomerFullname.Text;
+        //variable to store any error message
+        string Error = "";
 
-        //capture the customer email
-        ACustomer.Email = txtEmail.Text;
+        //validate the data
+        Error += ACustomer.Valid(CustomerFullname, Email, Address, Password, CreatedOn);
 
-        //capture the customer address
-        ACustomer.Address = txtAddress.Text;
+        if(Error == "")
+        {
+            //capture the customer full name
+            ACustomer.CustomerFullname = CustomerFullname;
 
-        //capture the customer password
-        ACustomer.Password = txtPassword.Text;
+            //capture the customer email
+            ACustomer.Email = Email;
 
-        //capture the customer created on date
-        ACustomer.CreatedOn = Convert.ToDateTime(DateTime.Now);
+            //capture the customer address
+            ACustomer.Address = Address;
 
-        //capture the bonus eligibility
-        ACustomer.BonusEligibility = chkBonusEligibility.Checked;
+            //capture the customer password
+            ACustomer.Password = Password;
 
-        //store the form data in the session object
-        Session["ACustomer"] = ACustomer;
+            //capture the customer created on date
+            ACustomer.CreatedOn = Convert.ToDateTime(CreatedOn);
 
-        //navigate to view page
-        Response.Redirect("CustomerViewer.aspx");
+            //store the form data in the session object
+            Session["ACustomer"] = ACustomer;
+
+            //navigate to view page
+            Response.Redirect("CustomerViewer.aspx");
+        }
+        else
+        {
+            //display the Error message
+            lblError.Text = Error; 
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
