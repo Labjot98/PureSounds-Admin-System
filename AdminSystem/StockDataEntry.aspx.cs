@@ -19,24 +19,48 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create new instance of cls stock
         clsStock1 aStock = new clsStock1();
 
-        //capture the text inside of itemname label
-        aStock.ItemName = txtItemName.Text;
-        //capture the text inside of itemID label
-        aStock.ItemID = Convert.ToInt32(txtItemID.Text);
-        aStock.DatePosted = Convert.ToDateTime(txtDatePosted.Text);
-        aStock.Quantity = Convert.ToInt32(txtQuantity.Text);
-        aStock.Price = Convert.ToDecimal(txtPrice.Text);
-        aStock.Brand = txtBrand.Text;
-        aStock.Bluetooth = chkBluetooth.Checked;
-        
+        string ItemName = txtItemName.Text;
+        string ItemID = txtItemID.Text;
+        string DatePosted = txtDatePosted.Text;
+        string Quantity = txtQuantity.Text;
+        string Price = txtPrice.Text;
+        string Brand = txtBrand.Text;
+        string Bluetooth = chkBluetooth.Text;
 
 
 
-        //store the stock in the session object
-        Session["aStock"] = aStock;
+        string Error = "";
+
+        Error = aStock.Valid(ItemName, ItemID, DatePosted, Price, Quantity);
+
+        if (Error == "")
+        {
+            aStock.ItemName = ItemName;
+            aStock.DatePosted = Convert.ToDateTime(DatePosted);
+            aStock.Quantity = Convert.ToInt32(Quantity);
+            aStock.Price = Convert.ToDecimal(Price);
+            aStock.Brand = Brand;
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
+
+
+
+
+
+            //aStock.ItemID = Convert.ToInt32(txtItemID.Text);
+            //aStock.Bluetooth = chkBluetooth.Checked;
+
+
+
+
+            //store the stock in the session object
+            //Session["aStock"] = aStock;
 
         //navigate to the view page
-        Response.Redirect("StockViewer.aspx");
+        //Response.Redirect("StockViewer.aspx");
     }
 
     protected void btnFind_Click(object sender, EventArgs e)

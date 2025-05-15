@@ -227,7 +227,7 @@ namespace ClassLibrary
             }
             catch
             {
-                Error = Error + "the quantity was not in valid decimal format : ";
+                Error = Error + "the quantity was not in valid integer format : ";
             }
 
 
