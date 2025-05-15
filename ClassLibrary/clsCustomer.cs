@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Runtime.Remoting;
 
 namespace ClassLibrary
@@ -164,20 +165,86 @@ namespace ClassLibrary
         {
             //create a variable to store the error
             string Error = "";
+            //create a temporary date variable
+            DateTime DateTemp;
 
             //if CustomerFullname is blank
             if(customerFullname.Length == 0)
             {
-                Error = Error + "Customeer Full name cannot be blank: ";
+                Error = Error + "Customer Full name cannot be blank: ";
             }
-
             //if CustomerFullname is greater than 100
             if(customerFullname.Length > 100)
             {
                 {
-                    Error = Error + "Customeer Full name must be less than 100 characters: ";
+                    Error = Error + "Customer Full name must be less than 100 characters: ";
                 }
             }
+
+            //if Email is blank
+            if(email.Length == 0)
+            {
+                Error = Error + "Customer email cannot be blank: ";
+
+            }
+            //if Email length is greater than 50
+            if (email.Length > 50)
+            {
+                {
+                    Error = Error + "Customer email must be less than 50 characters: ";
+                }
+            }
+
+            //if Address is blank
+            if (address.Length == 0)
+            {
+                Error = Error + "Customer Address cannot be blank: ";
+
+            }
+            //if Address length is greater than 200
+            if (address.Length > 200)
+            {
+                {
+                    Error = Error + "Customer Address must be less than 200 characters: ";
+                }
+            }
+
+            //if Password is blank
+            if (password.Length == 0)
+            {
+                Error = Error + "Password cannot be blank: ";
+
+            }
+            //if Address length is greater than 40
+            if (password.Length > 40)
+            {
+                {
+                    Error = Error + "Password must be less than 40 characters: ";
+                }
+            }
+
+          
+            try
+            {
+                //copy the createdOn value to DateTemp
+                DateTemp = Convert.ToDateTime(createdOn);
+                //check if its less than today's date
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    Error = Error + "The date cannot be in past";
+                }
+                //if date is greater than today's date
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    Error = Error + "The date cannot be in future";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error = Error + "The date was not a valid date";
+            }
+
 
             //return any error message
             return Error;
