@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ClassLibrary
 {
@@ -126,6 +127,113 @@ namespace ClassLibrary
             {
                 return false;
             }
+        }
+
+        public string Valid(string itemName, string brand, string datePosted, string price, string quantity)
+        {
+            String Error = "";
+
+            //temp var to store date
+            DateTime DateTemp;
+
+            //temp var to store price
+            Decimal PriceTemp;
+
+            //temp var to store quantity
+            int QuantityTemp;
+
+            //if ItemName is blank
+            if (itemName.Length == 0)
+            {
+                Error = Error + "the ItemName may not be empty : ";
+            }
+            //if item name is over 50 chars
+            if (itemName.Length > 50)
+            {
+                Error = Error + "The ItemName may not be above 50 characters : ";
+            }
+
+
+            //if brand is blank
+            if (brand.Length == 0)
+            {
+                Error = Error + "the Brand may not be empty : ";
+            }
+            
+            if (brand.Length > 55)
+            {
+                Error = Error + " the Brand may not be over 55 characters : ";
+            }
+
+            //create instance of DateTime to compare with DateTemp
+            DateTime DateComp = DateTime.Now.Date;
+
+            try
+            {
+                //copy datePosted variable to DateTemp
+                DateTemp = Convert.ToDateTime(datePosted);
+
+                if(DateTemp < DateComp)
+                {
+                    Error = Error + "The date cannot be in the past : ";
+                }
+                if (DateTemp > DateComp) 
+                {
+                    Error = Error + "The date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                Error = Error + "the date was not in valid date format : ";
+            }
+
+
+            //trycatch for price
+            try
+            {
+                PriceTemp = Convert.ToDecimal(price);
+
+                if (PriceTemp < 5.00m)
+                {
+                    Error = Error + "the price cannot be less than 5.00 : ";
+                }
+
+                if(PriceTemp > 1000.00m)
+                {
+                    Error = Error + "the price cannot be greater than 1000.00 : ";
+                }
+              
+            }
+            catch
+            {
+                Error = Error + "the price was not in valid decimal format : ";
+            }
+
+            //trycatch for quantity
+            try
+            {
+                QuantityTemp = Convert.ToInt32(quantity);
+
+                if (QuantityTemp < 0)
+                {
+                    Error = Error + "the Quantity cannot be less than 0 : ";
+                }
+
+                if (QuantityTemp > 1000)
+                {
+                    Error = Error + "the Quantity cannot be less than 1000 : ";
+                }
+
+            }
+            catch
+            {
+                Error = Error + "the quantity was not in valid decimal format : ";
+            }
+
+
+
+
+            return Error;
         }
     }
 
