@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Net.NetworkInformation;
+using System.Linq.Expressions;
+using System.Runtime.Remoting;
 
 namespace ClassLibrary
 {
     public class clsOrder
     {
+
         //private data member for the order id property
         private Int32 mOrderId;
         //order id public property
@@ -152,6 +155,83 @@ namespace ClassLibrary
                 //return false indicating there is a problem
                 return false;
             }
+        }
+
+        public string Valid(string customerId, string orderDate, string totalAmount, string status, string paymentMethod)
+        {
+            //create a variable to store the error
+            string Error = "";
+            //create a temporary date variable
+            DateTime DateTemp;
+            //if CustomerId is blank
+            if (customerId.Length == 0)
+            {
+                Error = Error + "Customer ID cannot be blank: ";
+            }
+            //if CustomerId length is greater than 12
+            if (customerId.Length > 12)
+            {
+                Error = Error + "Customer ID must be less than 12 characters: ";
+            }
+
+            //if OrderDate is blank
+            if (orderDate.Length == 0)
+            {
+                Error = Error + "Order Date cannot be blank: ";
+            }
+            //validate the date
+            try
+            {
+                DateTime TempDate = Convert.ToDateTime(orderDate);
+                if (TempDate < DateTime.Now.Date)
+                {
+                    Error = Error + "Order Date cannot be in the past: ";
+                }
+                if (TempDate > DateTime.Now.Date)
+                {
+                    Error = Error + "Order Date cannot be in the future: ";
+                }
+            }
+            catch
+            {
+                Error = Error + "Order Date is not a valid date: ";
+            }
+
+            //if TotalAmount is blank
+            if (totalAmount.Length == 0)
+            {
+                Error = Error + "Total Amount cannot be blank: ";
+            }
+            //if TotalAmount length is greater than 80
+            if (totalAmount.Length > 80)
+            {
+                Error = Error + "Total Amount must be less than 80 characters: ";
+            }
+
+            //if Status is blank
+            if (status.Length == 0)
+            {
+                Error = Error + "Status cannot be blank: ";
+            }
+            //if Status length is greater than 50
+            if (status.Length > 50)
+            {
+                Error = Error + "Status must be less than 50 characters: ";
+            }
+
+            //if PaymentMethod is blank
+            if (paymentMethod.Length == 0)
+            {
+                Error = Error + "Payment Method cannot be blank: ";
+            }
+            //if PaymentMethod length is greater than 30
+            if (paymentMethod.Length > 30)
+            {
+                Error = Error + "Payment Method must be less than 30 characters: ";
+            }
+
+            //return any error message
+            return Error;
         }
     }
 }

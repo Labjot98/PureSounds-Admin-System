@@ -7,6 +7,13 @@ namespace Testing4
     [TestClass]
     public class tstOrder
     {
+        //good test data
+        string CustomerId = "67890";
+        string OrderDate = DateTime.Now.ToShortDateString();
+        string TotalAmount = "99.99";
+        string Status = "Processing";
+        string PaymentMethod = "Credit Card";
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -274,6 +281,444 @@ namespace Testing4
             }
             //test to see that the result is correct
             Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            // Create an instance of the class we want to test
+            clsOrder AnOrder = new clsOrder();
+            // String variable to store any error message
+            string Error = "";
+            // Invoke the method
+            Error = AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            // Test to see if the result is true
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CustomerIdMinLessOne()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            string Error = "";
+            //create some test data to pass to the test
+            string CustomerId = "";       //this should trigger an error
+                                          //invoke the method
+            Error = AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            //test to see that result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CustomerIdMin()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            string Error = "";
+            //create some test data to pass to the test
+            string CustomerId = "12345";       //this should trigger an ok
+                                               //invoke the method
+            Error = AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            //test to see that result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CustomerIdMinPlusOne()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            string Error = "";
+            //create some test data to pass to the test
+            string CustomerId = "123456";       //this should trigger an ok
+                                                //invoke the method
+            Error = AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            //test to see that result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CustomerIdMaxLessOne()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            string Error = "";
+            //create some test data to pass to the test
+            string CustomerId = "123456789012";       //this should trigger an ok
+                                                      //invoke the method
+            Error = AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            //test to see that result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CustomerIdMax()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            string Error = "";
+            //create some test data to pass to the test
+            string CustomerId = "123456789012";       //this should trigger an ok
+                                                      //invoke the method
+            Error = AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            //test to see that result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CustomerIdMid()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            string Error = "";
+            //create some test data to pass to the test
+            string CustomerId = "123456789";       //this should trigger an ok
+                                                   //invoke the method
+            Error = AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            //test to see that result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CustomerIdMaxPlusOne()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            string Error = "";
+            //create some test data to pass to the test
+            string CustomerId = "1234567890123";       //this should trigger an error
+                                                       //invoke the method
+            Error = AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            //test to see that result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CustomerIdExtremeMax()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            string Error = "";
+            //create some test data to pass to the test
+            string CustomerId = "";
+            CustomerId = CustomerId.PadRight(300, '1');     // this should fail
+                                                            //invoke the method
+            Error = AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            //test to see that result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        /*-----------Tests for valid OrderDate-------------*/
+
+        [TestMethod]
+        public void OrderDateExtremeMin()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddYears(-100);
+            string OrderDate = TestDate.ToString();
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void OrderDateMinLessOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddDays(-1);
+            string OrderDate = TestDate.ToString();
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void OrderDateMin()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            string OrderDate = TestDate.ToString();
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void OrderDateMinPlusOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddDays(1);
+            string OrderDate = TestDate.ToString();
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void OrderDateExtremeMax()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddYears(100);
+            string OrderDate = TestDate.ToString();
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void OrderDateInvalidDate()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string OrderDate = "Some non date value";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        /*------------Tests for Valid TotalAmount */
+        [TestMethod]
+        public void TotalAmountMinLessOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string TotalAmount = "";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void TotalAmountMin()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string TotalAmount = "1";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void TotalAmountMinPlusOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string TotalAmount = "1";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void TotalAmountMaxLessOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string TotalAmount = "9999999";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void TotalAmountMid()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string TotalAmount = "10000";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void TotalAmountMax()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string TotalAmount = "99999999";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void TotalAmountMaxPlusOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string TotalAmount = "";
+            TotalAmount = TotalAmount.PadRight(81, '0');
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void TotalAmountExtremeMax()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string TotalAmount = "";
+            TotalAmount = new string('9', 100);
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        /*------------Tests for Valid Status */
+        [TestMethod]
+        public void StatusMinLessOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string Status = "";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void StatusMin()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string Status = "a";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void StatusMinPlusOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string Status = "aa";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void StatusMaxLessOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string Status = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void StatusMax()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string Status = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void StatusMaxPlusOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string Status = "";
+            Status = Status.PadRight(51, 'a');
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void StatusExtremeMax()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string Status = "";
+            Status = Status.PadRight(200, 'a');
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        /*------------Tests for Valid PaymentMethod */
+        [TestMethod]
+        public void PaymentMethodMinLessOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string PaymentMethod = "";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PaymentMethodMin()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string PaymentMethod = "C";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PaymentMethodMinPlusOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string PaymentMethod = "CC";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PaymentMethodMaxLessOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string PaymentMethod = "CreditCard";
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PaymentMethodMax()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string PaymentMethod = "CreditCard12345678901234567890"; // 30 characters
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PaymentMethodMaxPlusOne()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string PaymentMethod = "CreditCard123456789012345678901"; // 31 characters
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PaymentMethodExtremeMax()
+        {
+            clsOrder AOrder = new clsOrder();
+            string Error = "";
+            string PaymentMethod = "";
+            PaymentMethod = new string('A', 31); // 31 characters
+            Error = AOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+            Assert.AreNotEqual(Error, "");
         }
     }
 }
