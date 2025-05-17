@@ -18,24 +18,53 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create an instance of clsOrder
         clsOrder AnOrder = new clsOrder();
-        //capture the order id
-        AnOrder.OrderId = Convert.ToInt32(txtOrderId.Text);
-        //capture the customer id
-        AnOrder.CustomerId = Convert.ToInt32(txtCustomerId.Text);
-        //capture the order date
-        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
-        //capture the total amount
-        AnOrder.TotalAmount = Convert.ToDecimal(txtTotalAmount.Text);
-        //capture the order status
-        AnOrder.Status = txtStatus.Text;
-        //capture if discount was applied
-        AnOrder.DiscountApplied = chkDiscountApplied.Checked;
-        //capture the payment method
-        AnOrder.PaymentMethod = txtPaymentMethod.Text;
-        //store the form data in the session object
-        Session["AnOrder"] = AnOrder;
-        //navigate to view page
-        Response.Redirect("OrdersViewer.aspx");
+
+        //capture the data from the form
+        string OrderId = txtOrderId.Text;
+        string CustomerId = txtCustomerId.Text;
+        string OrderDate = txtOrderDate.Text;
+        string TotalAmount = txtTotalAmount.Text;
+        string Status = txtStatus.Text;
+        string PaymentMethod = txtPaymentMethod.Text;
+        string DiscountApplied = chkDiscountApplied.Text;
+
+        //variable to store any error message
+        string Error = "";
+
+        //validate the data
+        Error += AnOrder.Valid(CustomerId, OrderDate, TotalAmount, Status, PaymentMethod);
+
+        if (Error == "")
+        {
+            //capture the order ID
+            AnOrder.OrderId = Convert.ToInt32(OrderId);
+
+            //capture the customer ID
+            AnOrder.CustomerId = Convert.ToInt32(CustomerId);
+
+            //capture the order date
+            AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
+
+            //capture the total amount
+            AnOrder.TotalAmount = Convert.ToDecimal(TotalAmount);
+
+            //capture the order status
+            AnOrder.Status = Status;
+
+            //capture the payment method
+            AnOrder.PaymentMethod = PaymentMethod;
+
+            //store the form data in the session object
+            Session["AnOrder"] = AnOrder;
+
+            //navigate to the view page
+            Response.Redirect("OrdersViewer.aspx");
+        }
+        else
+        {
+            //display the Error message
+            lblError.Text = Error;
+        }
 
     }
 
