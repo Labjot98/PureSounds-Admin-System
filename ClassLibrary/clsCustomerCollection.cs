@@ -103,6 +103,37 @@ namespace ClassLibrary
                 //LATER
             }
         }
-        public clsCustomer ThisCustomer { get; set; }
+
+        //private data member for the ThisCustomer
+        clsCustomer mThisCustomer = new clsCustomer();
+        public clsCustomer ThisCustomer
+        {
+            get
+            {
+                return mThisCustomer;
+            }
+            set
+            {
+                mThisCustomer = value;
+            }
+        }
+
+        public int Add()
+        {
+            //adds a record to the database based on the values of mThisCustomer
+            //creating the db connection
+            clsDataConnection DB = new clsDataConnection();
+
+            //set the parameters for the stored procedure
+            DB.AddParameter("@CustomerFullname", mThisCustomer.CustomerFullname);
+            DB.AddParameter("@Email", mThisCustomer.Email);
+            DB.AddParameter("@Address", mThisCustomer.Address);
+            DB.AddParameter("@Password", mThisCustomer.Password);
+            DB.AddParameter("@BonusEligibility", mThisCustomer.BonusEligibility);
+            DB.AddParameter("@CreatedOn", mThisCustomer.CreatedOn);
+
+            //executer the query returning the primary key value
+            return DB.Execute("sproc_tblCustomer_Insert");
+        }
     }
 }
