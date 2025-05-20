@@ -45,7 +45,7 @@ namespace Testing1
             Assert.AreEqual(AllStaff.StaffList, TestList);
         }
 
-       
+
         [TestMethod]
         public void ThisStaffPropertyOK()
         {
@@ -162,6 +162,7 @@ namespace Testing1
             Assert.AreEqual(AllStaff.ThisStaff, TestItem);
         }
 
+        [TestMethod]
         public void DeleteMethodOK()
         {
             // create an instance of the class we want to create
@@ -193,6 +194,59 @@ namespace Testing1
             Assert.IsFalse(Found);
         }
 
+        [TestMethod]
+        public void ReportByNameMethodOK()
+        {
+            // create an instance of the class containing unfiltered results
+            clsStaffCollection AllStaffs = new clsStaffCollection();
+            // create the instance of the filtered data
+            clsStaffCollection FilteredStaffs = new clsStaffCollection();
+            // apply a blank string (should return all records)
+            FilteredStaffs.ReportByName("");
+            // test to see that the two values are the same
+            Assert.AreEqual(AllStaffs.Count, FilteredStaffs.Count);
+        }
 
+        [TestMethod]
+        public void ReportByNameNoneFoundOK()
+        {
+            // create an instance of the class we want to create
+            clsStaffCollection FilteredStaffs = new clsStaffCollection();
+            // apply a name that doesn't exist
+            FilteredStaffs.ReportByName("Wxyz");
+            // test to see that there are no records
+            Assert.AreEqual(0, FilteredStaffs.Count);
+        }
+
+        [TestMethod]
+        public void ReportByNameTestDataFoundOK()
+        {
+            // create an instance of the filtered data
+            clsStaffCollection FilteredStaffs = new clsStaffCollection();
+            // variable to store the outcome
+            Boolean OK = true;
+            // apply a name that does exist
+            FilteredStaffs.ReportByName("Char");
+            // check that the correct number of records are found
+            if (FilteredStaffs.Count == 2)
+            {
+                // check to see that the first record is for StaffID 34
+                if (FilteredStaffs.StaffList[0].StaffID != 34)
+                {
+                    OK = false;
+                }
+                // check to see that the second record is for StaffID 57
+                if (FilteredStaffs.StaffList[1].StaffID != 57)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            // test to see that OK stayed true
+            Assert.IsTrue(OK);
+        }
     }
 }

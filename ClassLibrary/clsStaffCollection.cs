@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ClassLibrary
 {
 
-// constructor for the class
+    // constructor for the class
     public class clsStaffCollection
     {
         // private data member for the list
@@ -16,34 +16,12 @@ namespace ClassLibrary
         // constructor for the class
         public clsStaffCollection()
         {
-            // variable for the index
-            Int32 Index = 0;
-            // variable to store the record count
-            Int32 RecordCount = 0;
-            // object for the data connect
-            clsDataConnection DB= new clsDataConnection();
+            // object for the data connection
+            clsDataConnection DB = new clsDataConnection();
             // execute the stored procedure
             DB.Execute("sproc_tblStaff_SelectAll");
-            // get the count of records
-            RecordCount = DB.Count;
-            // while there are records to process
-            while (Index <  RecordCount)
-            {
-                // create a blank Staff
-                clsStaff AStaff = new clsStaff();
-                // read in the fields for the current record
-                AStaff.StaffID = Convert.ToInt32(DB.DataTable.Rows[Index]["StaffID"]);
-                AStaff.Name = Convert.ToString(DB.DataTable.Rows[Index]["Name"]);
-                AStaff.DateJoined = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateJoined"]);
-                AStaff.DateLeft = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateLeft"]);
-                AStaff.Rank = Convert.ToString(DB.DataTable.Rows[Index]["Rank"]);
-                AStaff.NINumber = Convert.ToString(DB.DataTable.Rows[Index]["NINumber"]);
-                AStaff.IsFemale = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsFemale"]);
-                // add the record to the private data member
-                mStaffList.Add(AStaff);
-                // point at the next record
-                Index++;
-            }
+            // populate the array list with the table data
+            PopulateArray(DB);
         }
 
         // create the items of test data
@@ -136,6 +114,50 @@ namespace ClassLibrary
             DB.AddParameter("@StaffId", mThisStaff.StaffID);
             // execute the stored procedure
             DB.Execute("sproc_tblStaff_Delete");
+        }
+
+        public void ReportByName(string Name)
+        {
+            // filters the records based on full or partial Name
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // send the Name parameter to the database
+            DB.AddParameter("@Name", Name);
+            // execute the stored procedure
+            DB.Execute("sproc_tblStaff_FilterByName");
+            // populate the array list with the table data
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            // populates the array list based on the data table in the parameter DB
+            // variable for the index
+            Int32 Index = 0;
+            // variable to store the record count
+            Int32 RecordCount;
+            // get the count of records
+            RecordCount = DB.Count;
+            // clear the private array list
+            mStaffList = new List<clsStaff>();
+            // while there are records to process
+            while (Index < RecordCount)
+            {
+                // create a blank Staff object
+                clsStaff AStaff = new clsStaff();
+                // read in the fields from the current record
+                AStaff.StaffID = Convert.ToInt32(DB.DataTable.Rows[Index]["StaffID"]);
+                AStaff.Name = Convert.ToString(DB.DataTable.Rows[Index]["Name"]);
+                AStaff.DateJoined = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateJoined"]);
+                AStaff.DateLeft = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateLeft"]);
+                AStaff.Rank = Convert.ToString(DB.DataTable.Rows[Index]["Rank"]);
+                AStaff.NINumber = Convert.ToString(DB.DataTable.Rows[Index]["NINumber"]);
+                AStaff.IsFemale = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsFemale"]);
+                // add the record to the private data member
+                mStaffList.Add(AStaff);
+                // point at the next record
+                Index++;
+            }
         }
     }
 }
