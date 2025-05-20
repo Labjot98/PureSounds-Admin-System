@@ -49,11 +49,20 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //capture the customer created on date
             ACustomer.CreatedOn = Convert.ToDateTime(CreatedOn);
 
-            //store the form data in the session object
-            Session["ACustomer"] = ACustomer;
+            //capture active
+            ACustomer.BonusEligibility = chkBonusEligibility.Checked;
 
-            //navigate to view page
-            Response.Redirect("CustomerViewer.aspx");
+            //create a new instance of the customer collection
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
+
+            //set the ThisCustomer property
+            CustomerList.ThisCustomer = ACustomer;
+
+            //add the new record
+            CustomerList.Add();
+
+            //redirect back to list page
+            Response.Redirect("CustomerList.aspx");
         }
         else
         {
@@ -92,7 +101,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
         else
         {
-            lblError.Text = "Customer Id doesn't exist";
+            lblError.Text = "Error";
         }
     }
 }
