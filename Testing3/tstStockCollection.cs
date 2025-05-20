@@ -94,6 +94,38 @@ namespace Testing3
 
         }
 
-    
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            //create instance of class we want to create
+            clsStockCollection ALLStock = new clsStockCollection();
+            
+
+            //variable to store primary key
+            int PrimaryKey = 0;
+
+            clsStock1 TestItem = new clsStock1();
+            TestItem.Bluetooth = true;
+            TestItem.ItemID = 1;
+            TestItem.ItemName = "testing";
+            TestItem.DatePosted = DateTime.Now;
+            TestItem.Brand = "testingbrand";
+            TestItem.Quantity = 40;
+            TestItem.Price = 99.99m;
+
+            ALLStock.ThisStock = TestItem;
+
+            PrimaryKey = ALLStock.Add();
+            TestItem.ItemID = PrimaryKey;
+
+            ALLStock.ThisStock.Find(PrimaryKey);
+
+            Assert.AreEqual(ALLStock.ThisStock, TestItem);
+
+        }
+
+
+
+
     }
 }
