@@ -5,6 +5,11 @@ namespace ClassLibrary
 {
     public class clsStockCollection
     {
+
+        //private data member for the list
+        List<clsStock1> mStockList = new List<clsStock1>();
+        clsStock1 mThisStock = new clsStock1();
+
         public clsStockCollection()
         {
 
@@ -35,7 +40,7 @@ namespace ClassLibrary
 
 
 
-        List<clsStock1> mStockList = new List<clsStock1>();
+        //List<clsStock1> mStockList = new List<clsStock1>();
 
 
         public List<clsStock1> StockList
@@ -48,6 +53,33 @@ namespace ClassLibrary
             get { return mStockList.Count; }
             set { }
         }
-        public clsStock1 ThisStock { get; set; }
+        public clsStock1 ThisStock
+        {
+            get
+            {
+                return mThisStock;
+            }
+            set
+            {
+                mThisStock = value;
+            }
+        }
+
+        public int Add()
+        {
+            //adds a record to the database based on the values of mThisStock
+            //connect to the databse
+            clsDataConnection DB = new clsDataConnection();
+
+            //set params for the stored procedure
+            DB.AddParameter("ItemName", mThisStock.ItemName);
+            DB.AddParameter("DatePosted", mThisStock.DatePosted);
+            DB.AddParameter("Quantity", mThisStock.Quantity);
+            DB.AddParameter("Bluetooth", mThisStock.Bluetooth);
+            DB.AddParameter("Price", mThisStock.Price);
+            DB.AddParameter("Brand", mThisStock.Brand);
+
+            return DB.Execute("sproc_tblHeadPhone_Insert");
+        }
     }
 }

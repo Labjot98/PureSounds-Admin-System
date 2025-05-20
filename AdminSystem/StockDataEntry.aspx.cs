@@ -40,6 +40,17 @@ public partial class _1_DataEntry : System.Web.UI.Page
             aStock.Quantity = Convert.ToInt32(Quantity);
             aStock.Price = Convert.ToDecimal(Price);
             aStock.Brand = Brand;
+            aStock.Bluetooth = chkBluetooth.Checked;
+
+            //create new instance of Stock Collection
+            clsStockCollection StockList = new clsStockCollection();
+            
+            //set thisStock property and call add function
+            StockList.ThisStock = aStock;
+            StockList.Add();
+
+            //redirect to list page
+            Response.Redirect("StockList.aspx");
         }
         else
         {
@@ -49,18 +60,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
 
 
-
-            //aStock.ItemID = Convert.ToInt32(txtItemID.Text);
-            //aStock.Bluetooth = chkBluetooth.Checked;
-
-
-
-
-            //store the stock in the session object
-            //Session["aStock"] = aStock;
-
-        //navigate to the view page
-        //Response.Redirect("StockViewer.aspx");
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
