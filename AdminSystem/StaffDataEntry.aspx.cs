@@ -8,10 +8,40 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    // variable to store the primary key with page-level scope
+    Int32 StaffId;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        // get the number of the staff member's record to be processed
+        StaffId = Convert.ToInt32(Session["StaffId"]);
+        if (IsPostBack == false)
+        {
+            // if this is not a new record
+            if (StaffId != -1)
+            {
+                // display the current data for the record
+                DisplayStaff();
+            }
+        }
     }
+
+    void DisplayStaff()
+    {
+        // create an instance of the Staff collection
+        clsStaffCollection StaffList = new clsStaffCollection();
+        // find the record to update
+        StaffList.ThisStaff.Find(StaffId);
+        // display the data for the record
+        txtStaffID.Text = StaffList.ThisStaff.StaffID.ToString();
+        txtName.Text = StaffList.ThisStaff.Name.ToString();
+        txtDateJoined.Text = StaffList.ThisStaff.DateJoined.ToString();
+        txtDateLeft.Text = StaffList.ThisStaff.DateLeft.ToString();
+        txtRank.Text = StaffList.ThisStaff.Rank.ToString();
+        txtNINumber.Text = StaffList.ThisStaff.NINumber.ToString();
+        chkIsFemale.Checked = StaffList.ThisStaff.IsFemale;
+    }
+
+
 
     protected void txtRank_TextChanged(object sender, EventArgs e)
     {
@@ -42,6 +72,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
         if (Error == "")
         {
+            // capture the StaffId
+            AStaff.StaffID = StaffId;
             // capture the name
             AStaff.Name = Name;
             // capture the date joined
@@ -54,13 +86,27 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AStaff.NINumber = NINumber;
             // capture the IsFemale boolean
             AStaff.IsFemale = chkIsFemale.Checked;
-
             // create a new instance of the Staff collection
             clsStaffCollection StaffList = new clsStaffCollection();
-            // set the ThisStaff property
-            StaffList.ThisStaff = AStaff;
-            // add the new record
-            StaffList.Add();
+
+            // if this is a new record (i.e. StaffId = -1) then add the data
+            if (StaffId == -1)
+            {
+                // set the ThisStaff property
+                StaffList.ThisStaff = AStaff;
+                // add the new record
+                StaffList.Add();
+            }
+            // otherwise it must be an update
+            else
+            {
+                // find the record to update
+                StaffList.ThisStaff.Find(StaffId);
+                // set the ThisStaff property
+                StaffList.ThisStaff = AStaff;
+                // update the record
+                StaffList.Update();
+            }
             // redirect back to the list page
             Response.Redirect("StaffList.aspx");
         }
