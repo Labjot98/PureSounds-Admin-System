@@ -14,8 +14,19 @@
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
         <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="Edit" />
         <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" />
+        <br />
         <p>
             <asp:Label ID="lblError" runat="server"></asp:Label>
+        </p>
+        <p>
+            <asp:Label ID="lblFilter" runat="server" Text="Enter a name"></asp:Label>
+        </p>
+        <p>
+            <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" style="z-index: 1; top: 511px; position: absolute" Text="Apply Filter" />
+            <asp:Button ID="btnClearFilter" runat="server" OnClick="btnClearFilter_Click" style="z-index: 1; left: 172px; top: 511px; position: absolute" Text="Clear Filter" />
+        </p>
+        <p>
+            <asp:TextBox ID="txtFilter" runat="server" style="z-index: 1; left: 119px; top: 405px; position: absolute; right: 605px"></asp:TextBox>
         </p>
     </form>
 </body>
