@@ -52,12 +52,18 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AStaff.Rank = Rank;
             // capture the NI number
             AStaff.NINumber = NINumber;
-            // store the staff member details in the session object
-            Session["AStaff"] = AStaff;
-            // navigate to the view page
-            Response.Redirect("StaffViewer.aspx");
-        }
+            // capture the IsFemale boolean
+            AStaff.IsFemale = chkIsFemale.Checked;
 
+            // create a new instance of the Staff collection
+            clsStaffCollection StaffList = new clsStaffCollection();
+            // set the ThisStaff property
+            StaffList.ThisStaff = AStaff;
+            // add the new record
+            StaffList.Add();
+            // redirect back to the list page
+            Response.Redirect("StaffList.aspx");
+        }
         else
         {
             // display the error message
