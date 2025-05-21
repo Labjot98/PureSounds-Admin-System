@@ -228,7 +228,7 @@ namespace Testing1
             // apply a name that does exist
             FilteredStaffs.ReportByName("Char");
             // check that the correct number of records are found
-            if (FilteredStaffs.Count == 2)
+            if (FilteredStaffs.Count == 3)
             {
                 // check to see that the first record is for StaffID 34
                 if (FilteredStaffs.StaffList[0].StaffID != 34)
@@ -237,6 +237,11 @@ namespace Testing1
                 }
                 // check to see that the second record is for StaffID 57
                 if (FilteredStaffs.StaffList[1].StaffID != 57)
+                {
+                    OK = false;
+                }
+                // check to see that the second record is for StaffID 70
+                if (FilteredStaffs.StaffList[2].StaffID != 70)
                 {
                     OK = false;
                 }
