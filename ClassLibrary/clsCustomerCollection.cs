@@ -8,70 +8,14 @@ namespace ClassLibrary
     {
         public clsCustomerCollection()
         {
-            //variable for the index
-            Int32 Index = 0;
-
-            //variable to store the record count
-            Int32 RecordCount = 0;
-
-            //creating the db connection
+            //object for the data connection
             clsDataConnection DB = new clsDataConnection();
 
             //execute the stored procedure
             DB.Execute("sproc_tblCustomer_SelectAll");
 
-            //get the count of records
-            RecordCount = DB.Count;
-
-            //while there are records to process
-            while(Index < RecordCount)
-            {
-                //create a blank Customer
-                clsCustomer ACustomer = new clsCustomer();
-
-                //read in the fields for the current record
-                ACustomer.CustomerId = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerId"]);
-                ACustomer.CustomerFullname = Convert.ToString(DB.DataTable.Rows[Index]["CustomerFullname"]);
-                ACustomer.Email = Convert.ToString(DB.DataTable.Rows[Index]["Email"]);
-                ACustomer.Address = Convert.ToString(DB.DataTable.Rows[Index]["Address"]);
-                ACustomer.Password = Convert.ToString(DB.DataTable.Rows[Index]["Password"]);
-                ACustomer.BonusEligibility = Convert.ToBoolean(DB.DataTable.Rows[Index]["BonusEligibility"]);
-                ACustomer.CreatedOn = Convert.ToDateTime(DB.DataTable.Rows[Index]["CreatedOn"]);
-
-                //add the record to the private data member
-                mCustomerList.Add(ACustomer);
-
-                //point to next record
-                Index++;
-            }
-
-            //create the items to test data
-            clsCustomer TestItem = new clsCustomer();
-            //set its properties
-            TestItem.CustomerId = 1;
-            TestItem.CustomerFullname = "Tim David";
-            TestItem.Email = "timdavid@gmail.com";
-            TestItem.Password = "timdavid123";
-            TestItem.Address = "92 Some Street, LE1 4AD, Leicester";
-            TestItem.BonusEligibility = true;
-            TestItem.CreatedOn = DateTime.Now;
-
-            //add the test item to the test list
-            mCustomerList.Add(TestItem);
-
-            //re initialise the object
-            TestItem = new clsCustomer();
-            //set its properties
-            TestItem.CustomerId = 2;
-            TestItem.CustomerFullname = "Josh Inglis";
-            TestItem.Email = "josh@gmail.com";
-            TestItem.Password = "joshinglis123";
-            TestItem.Address = "7 Another Street, LE1 2AD, Leicester";
-            TestItem.BonusEligibility = true;
-            TestItem.CreatedOn = DateTime.Now;
-
-            //add the test item to the test list
-            mCustomerList.Add(TestItem);
+            //populate the array list with the data table
+            PopulateArray(DB);
         }
 
         //private data member for the list
@@ -117,6 +61,44 @@ namespace ClassLibrary
             set
             {
                 mThisCustomer = value;
+            }
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            //populate the array list based on the data table in the parameter DB
+            //variable for the index
+            Int32 Index = 0;
+
+            //variable to store the record count
+            Int32 RecordCount = 0;
+
+            //get the count of records
+            RecordCount = DB.Count;
+
+            //clear the private array list
+            mCustomerList = new List<clsCustomer>();
+
+            //while there are records to process
+            while (Index < RecordCount)
+            {
+                //create a blank Customer
+                clsCustomer ACustomer = new clsCustomer();
+
+                //read in the fields for the current record
+                ACustomer.CustomerId = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerId"]);
+                ACustomer.CustomerFullname = Convert.ToString(DB.DataTable.Rows[Index]["CustomerFullname"]);
+                ACustomer.Email = Convert.ToString(DB.DataTable.Rows[Index]["Email"]);
+                ACustomer.Address = Convert.ToString(DB.DataTable.Rows[Index]["Address"]);
+                ACustomer.Password = Convert.ToString(DB.DataTable.Rows[Index]["Password"]);
+                ACustomer.BonusEligibility = Convert.ToBoolean(DB.DataTable.Rows[Index]["BonusEligibility"]);
+                ACustomer.CreatedOn = Convert.ToDateTime(DB.DataTable.Rows[Index]["CreatedOn"]);
+
+                //add the record to the private data member
+                mCustomerList.Add(ACustomer);
+
+                //point to next record
+                Index++;
             }
         }
 
@@ -168,6 +150,22 @@ namespace ClassLibrary
 
             //execute the stored procedure
             DB.Execute("sproc_tblCustomer_Delete");
+        }
+
+        public void ReportByFullname(string Fullname)
+        {
+            //filters the records based on a full or partial name
+            //creating the db connection
+            clsDataConnection DB = new clsDataConnection();
+
+            //set the parameter for the stored procedure
+            DB.AddParameter("@Fullname", Fullname);
+
+            //execute the stored procedure
+            DB.Execute("sproc_tblCustomer_FilterByFullname");
+
+            //populate the array list with the data table
+            PopulateArray(DB);
         }
     }
 }
