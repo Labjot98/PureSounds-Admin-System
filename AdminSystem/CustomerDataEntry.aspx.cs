@@ -32,10 +32,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsCustomerCollection CustomerList = new clsCustomerCollection();
 
         //find the record to update
-        Console.Write(CustomerId);
         CustomerList.ThisCustomer.Find(CustomerId);
-        Console.Write(CustomerList);
-        
 
         //display the data for the record
         txtCustomerId.Text = CustomerList.ThisCustomer.CustomerId.ToString();
