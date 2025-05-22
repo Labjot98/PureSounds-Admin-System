@@ -148,7 +148,7 @@ namespace Testing2
             Boolean Found = false;
 
             //create some test data to use with the method
-            Int32 CustomerId = 8;
+            Int32 CustomerId = 32;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
@@ -171,13 +171,13 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 8;
+            Int32 CustomerId = 32;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
             //check the address id
-            if (ACustomer.CustomerId != 8)
+            if (ACustomer.CustomerId != 32)
             {
                 OK = false;
             }
@@ -200,7 +200,7 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 8;
+            Int32 CustomerId = 32;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
@@ -228,7 +228,7 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 8;
+            Int32 CustomerId = 32;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
@@ -256,7 +256,7 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 8;
+            Int32 CustomerId = 32;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
@@ -284,7 +284,7 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 8;
+            Int32 CustomerId = 32;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
@@ -312,7 +312,7 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 8;
+            Int32 CustomerId = 32;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
@@ -340,13 +340,13 @@ namespace Testing2
             Boolean OK = true;
 
             //create some test data to use with the method
-            Int32 CustomerId = 8;
+            Int32 CustomerId = 32;
 
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
             //check the customer email
-            if (ACustomer.CreatedOn != Convert.ToDateTime("07/05/2025"))
+            if (ACustomer.CreatedOn != Convert.ToDateTime("22/05/2025"))
             {
                 OK = false;
             }

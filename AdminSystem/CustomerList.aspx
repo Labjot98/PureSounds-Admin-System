@@ -15,7 +15,9 @@
         <asp:ListBox runat="server" ID="lstCustomerList" Height="240px" Width="260px"></asp:ListBox>
         <p>
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" style="z-index: 1; width: 60px" Text="Add" />
-        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" style="z-index: 1; width: 60px; margin-left:140px" Text="Edit" />
+        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" style="z-index: 1; width: 60px; margin-left:60px" Text="Edit" />
+        <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" style="z-index: 1; width: 60px; margin-left:60px" Text="Delete" />
+
         </p>
         <asp:Label ID="lblError" runat="server" style="width:100px"></asp:Label>
     </form>
