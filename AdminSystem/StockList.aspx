@@ -39,6 +39,7 @@
         <p>
             <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
             <asp:Button ID="btnEdit" runat="server" Height="24px" style="margin-left:30px" Text="Edit" OnClick="btnEdit_Click" />
+            <asp:Button ID="btnDelete" runat="server" Text="Delete" Height="24px" style="margin-left:30px" OnClick="btnDelete_Click" />
         </p>
         <p>
             <asp:Label ID="lblError" runat="server"></asp:Label>
