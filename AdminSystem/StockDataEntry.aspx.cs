@@ -19,8 +19,13 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //if this is not a new record
         if(IsPostBack == false)
         {
-            //displays the current data for the record
-            DisplayStock();
+            //if this is not a new record
+            if (ItemID != -1)
+            {
+                //displays the current data for the record
+                DisplayStock();
+            }
+            
         }
     }
 
