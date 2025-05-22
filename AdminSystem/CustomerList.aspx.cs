@@ -90,4 +90,50 @@ public partial class _1_List : System.Web.UI.Page
             lblError.Text = "Please select a record from the list to delete";
         }
     }
+
+    protected void btnApplyFilter_Click(object sender, EventArgs e)
+    {
+        //create an instance of the customer object
+        clsCustomerCollection ACustomer = new clsCustomerCollection();
+
+        //retrieve the value of fullname from the presentation layer
+        ACustomer.ReportByFullname(txtFilterFullname.Text);
+
+        //set the data source to the list of cusotmers in the collection
+        lstCustomerList.DataSource = ACustomer.CustomerList;
+
+        //set the name of the primary key
+        lstCustomerList.DataValueField = "CustomerId";
+
+        //set teh name of the field to display
+        lstCustomerList.DataTextField = "CustomerFullname";
+
+        //bind the data to the list
+        lstCustomerList.DataBind();
+        
+    }
+
+    protected void btnClearFilter_Click(object sender, EventArgs e)
+    {
+        //create an instance of the customer object
+        clsCustomerCollection ACustomer = new clsCustomerCollection();
+
+        //set an empty string
+        ACustomer.ReportByFullname("");
+
+        //clear any existing filter to tidy up the interface
+        txtFilterFullname.Text = "";
+
+        //set the data source to the list of cusotmers in the collection
+        lstCustomerList.DataSource = ACustomer.CustomerList;
+
+        //set the name of the primary key
+        lstCustomerList.DataValueField = "CustomerId";
+
+        //set teh name of the field to display
+        lstCustomerList.DataTextField = "CustomerFullname";
+
+        //bind the data to the list
+        lstCustomerList.DataBind();
+    }
 }
