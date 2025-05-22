@@ -75,7 +75,11 @@ namespace ClassLibrary
         }
 
         //private data member for the list
-        private List<clsCustomer> mCustomerList = new List<clsCustomer>();
+        List<clsCustomer> mCustomerList = new List<clsCustomer>();
+
+        //private data member for the ThisCustomer
+        clsCustomer mThisCustomer = new clsCustomer();
+
         //public property for the customer list
         public List<clsCustomer> CustomerList
         { 
@@ -96,7 +100,7 @@ namespace ClassLibrary
         {
             get
             {
-                return CustomerList.Count;
+                return mCustomerList.Count;
             }
             set
             {
@@ -104,8 +108,6 @@ namespace ClassLibrary
             }
         }
 
-        //private data member for the ThisCustomer
-        clsCustomer mThisCustomer = new clsCustomer();
         public clsCustomer ThisCustomer
         {
             get
@@ -134,6 +136,25 @@ namespace ClassLibrary
 
             //executer the query returning the primary key value
             return DB.Execute("sproc_tblCustomer_Insert");
+        }
+
+        public void Update()
+        {
+            //update an existing record based on the values of mThisCustomer
+            //creating the db connection
+            clsDataConnection DB = new clsDataConnection();
+
+            //set the parameters for the stored procedure
+            DB.AddParameter("@CustomerId", mThisCustomer.CustomerId);
+            DB.AddParameter("@CustomerFullname", mThisCustomer.CustomerFullname);
+            DB.AddParameter("@Email", mThisCustomer.Email);
+            DB.AddParameter("@Address", mThisCustomer.Address);
+            DB.AddParameter("@Password", mThisCustomer.Password);
+            DB.AddParameter("@BonusEligibility", mThisCustomer.BonusEligibility);
+            DB.AddParameter("@CreatedOn", mThisCustomer.CreatedOn);
+
+            //executer the stored procedure
+            DB.Execute("sproc_tblCustomer_Update");
         }
     }
 }

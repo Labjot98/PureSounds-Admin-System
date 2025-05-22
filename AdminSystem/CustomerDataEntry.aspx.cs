@@ -8,17 +8,52 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    //variable to store the primary key with the page level scope
+    Int32 CustomerId;
     protected void Page_Load(object sender, EventArgs e)
     {
+        //get the number of the customer to be processed
+        CustomerId = Convert.ToInt32(Session["CustomerId"]);
 
+        if(IsPostBack == false)
+        {
+            //if this is the not a new record
+            if(CustomerId != -1)
+            {
+                //Display the current data for the record
+                DisplayCustomer();
+            }
+        }
     }
+
+    void DisplayCustomer()
+    {
+        //create an instance of the customer list
+        clsCustomerCollection CustomerList = new clsCustomerCollection();
+
+        //find the record to update
+        Console.Write(CustomerId);
+        CustomerList.ThisCustomer.Find(CustomerId);
+        Console.Write(CustomerList);
+        
+
+        //display the data for the record
+        txtCustomerId.Text = CustomerList.ThisCustomer.CustomerId.ToString();
+        txtCustomerFullname.Text = CustomerList.ThisCustomer.CustomerFullname.ToString();
+        txtEmail.Text = CustomerList.ThisCustomer.Email.ToString();
+        txtAddress.Text = CustomerList.ThisCustomer.Address.ToString();
+        txtPassword.Text = CustomerList.ThisCustomer.Password.ToString();
+        chkBonusEligibility.Checked = CustomerList.ThisCustomer.BonusEligibility;
+        txtCreatedOn.Text = CustomerList.ThisCustomer.CreatedOn.ToString();
+    }
+
     protected void btnOK_Click(object sender, EventArgs e)
     {
         //create an instance of clsCustomer
         clsCustomer ACustomer = new clsCustomer();
 
         //capture the data from the form
-        string CustomerId = txtCreatedOn.Text;
+        //string CustomerId = txtCreatedOn.Text;
         string CustomerFullname = txtCustomerFullname.Text;
         string Email = txtEmail.Text;
         string Address = txtAddress.Text; 
@@ -34,6 +69,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         if(Error == "")
         {
+            //capture the customer id
+            ACustomer.CustomerId = CustomerId;
+
             //capture the customer full name
             ACustomer.CustomerFullname = CustomerFullname;
 
@@ -55,11 +93,27 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //create a new instance of the customer collection
             clsCustomerCollection CustomerList = new clsCustomerCollection();
 
-            //set the ThisCustomer property
-            CustomerList.ThisCustomer = ACustomer;
+            //if it is a new customer
+            if(CustomerId == -1)
+            {
+                //set the ThisCustomer property
+                CustomerList.ThisCustomer = ACustomer;
 
-            //add the new record
-            CustomerList.Add();
+                //add the new record
+                CustomerList.Add();
+            }
+            //otherwise it must be an update
+            else
+            {
+                //find the record to update
+                CustomerList.ThisCustomer.Find(CustomerId);
+
+                //set the ThisCustomer property
+                CustomerList.ThisCustomer = ACustomer;
+
+                //update the record
+                CustomerList.Update();
+            }
 
             //redirect back to list page
             Response.Redirect("CustomerList.aspx");
