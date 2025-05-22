@@ -107,9 +107,9 @@ namespace Testing3
             clsStock1 TestItem = new clsStock1();
             TestItem.Bluetooth = true;
             TestItem.ItemID = 1;
-            TestItem.ItemName = "testing";
+            TestItem.ItemName = "testingAgain";
             TestItem.DatePosted = DateTime.Now;
-            TestItem.Brand = "testingbrand";
+            TestItem.Brand = "testingbrand 3.0";
             TestItem.Quantity = 40;
             TestItem.Price = 99.99m;
 
@@ -122,6 +122,50 @@ namespace Testing3
 
             Assert.AreEqual(ALLStock.ThisStock, TestItem);
 
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            clsStockCollection ALLStock = new clsStockCollection();
+
+            clsStock1 TestItem = new clsStock1();
+
+            int PrimaryKey = 0;
+
+            TestItem.Bluetooth = false;
+            TestItem.ItemName = "testingUpdate";
+            TestItem.DatePosted = DateTime.Now;
+            TestItem.Brand = "testingbrand Update";
+            TestItem.Quantity = 50;
+            TestItem.Price = 99.99m;
+
+            ALLStock.ThisStock = TestItem;
+
+            //add the record
+            PrimaryKey = ALLStock.Add();
+            //set primary key of the test data
+            TestItem.ItemID = PrimaryKey;
+
+            //modify the test data
+            TestItem.Bluetooth = true;
+            TestItem.ItemName = "testingUpdate change";
+            TestItem.DatePosted = DateTime.Now;
+            TestItem.Brand = "testingbrand Update change";
+            TestItem.Quantity = 50;
+            TestItem.Price = 99.99m;
+
+            //set the record based on the new test data
+            ALLStock.ThisStock = TestItem;
+
+            //update the record
+            ALLStock.Update();
+
+            //find the record
+            ALLStock.ThisStock.Find(PrimaryKey);
+
+            //test to see if it matches the test data
+            Assert.AreEqual (ALLStock.ThisStock, TestItem);
         }
 
 

@@ -8,9 +8,37 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 ItemID;
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        //get the numver of the item to be processed
+        ItemID = Convert.ToInt32(Session["ItemID"]);
 
+        //if this is not a new record
+        if(IsPostBack == false)
+        {
+            //displays the current data for the record
+            DisplayStock();
+        }
+    }
+
+    void DisplayStock()
+    {
+        //create a new instance of the stock list
+        clsStockCollection ALLStock = new clsStockCollection();
+
+        ALLStock.ThisStock.Find(ItemID);
+        //display the data for the record
+
+        txtItemID.Text = ALLStock.ThisStock.ItemID.ToString();
+        txtItemName.Text = ALLStock.ThisStock.ItemName;
+        txtDatePosted.Text = ALLStock.ThisStock.DatePosted.ToString();
+        txtQuantity.Text = ALLStock.ThisStock.Quantity.ToString();
+        txtPrice.Text = ALLStock.ThisStock.Price.ToString();
+        txtBrand.Text = ALLStock.ThisStock.Brand;
+        chkBluetooth.Checked = ALLStock.ThisStock.Bluetooth;
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -20,7 +48,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsStock1 aStock = new clsStock1();
 
         string ItemName = txtItemName.Text;
-        string ItemID = txtItemID.Text;
+        //string ItemID = txtItemID.Text;
         string DatePosted = txtDatePosted.Text;
         string Quantity = txtQuantity.Text;
         string Price = txtPrice.Text;
@@ -31,10 +59,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         string Error = "";
 
-        Error = aStock.Valid(ItemName, ItemID, DatePosted, Price, Quantity);
+        Error = aStock.Valid(ItemName, Brand, DatePosted, Price, Quantity);
 
         if (Error == "")
         {
+            aStock.ItemID = ItemID;
             aStock.ItemName = ItemName;
             aStock.DatePosted = Convert.ToDateTime(DatePosted);
             aStock.Quantity = Convert.ToInt32(Quantity);
@@ -45,11 +74,20 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //create new instance of Stock Collection
             clsStockCollection StockList = new clsStockCollection();
             
-            //set thisStock property and call add function
-            StockList.ThisStock = aStock;
-            StockList.Add();
-
-            //redirect to list page
+            //if this is a new record
+            if(ItemID == -1)
+            {
+                //set thisStock property
+                StockList.ThisStock = aStock;
+                //add the new record
+                StockList.Add();
+            }
+            else
+            {
+                StockList.ThisStock.Find(ItemID);
+                StockList.ThisStock = aStock;
+                StockList.Update();
+            }
             Response.Redirect("StockList.aspx");
         }
         else

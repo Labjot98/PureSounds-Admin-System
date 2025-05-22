@@ -81,5 +81,24 @@ namespace ClassLibrary
 
             return DB.Execute("sproc_tblHeadPhone_Insert");
         }
+
+        public void Update()
+        {
+            //update an existing record based on the values of thisStock
+            //Connect to the Database
+            clsDataConnection DB = new clsDataConnection();
+            //set the parameters for the new stored procedure
+            DB.AddParameter("ItemID", mThisStock.ItemID);
+            DB.AddParameter("ItemName", mThisStock.ItemName);
+            DB.AddParameter("DatePosted", mThisStock.DatePosted);
+            DB.AddParameter("Quantity", mThisStock.Quantity);
+            DB.AddParameter("Bluetooth", mThisStock.Bluetooth);
+            DB.AddParameter("Price", mThisStock.Price);
+            DB.AddParameter("Brand", mThisStock.Brand);
+
+            //execute stored procedure,
+            DB.Execute("sproc_tblHeadPhone_Update");
+
+        }
     }
 }
