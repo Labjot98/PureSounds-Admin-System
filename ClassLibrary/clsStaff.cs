@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Management.Instrumentation;
 
@@ -251,16 +252,38 @@ namespace ClassLibrary
                 // record the error
                 Error = Error + "The NI number may not be blank : ";
             }
-            // if the NI number is not exactlu 9 characters
+            // if the NI number is not exactly 9 characters
             if (nINumber.Length != 9)
             {
                 // record the error
                 Error = Error + "The NI number must be exactly 9 characters : ";
             }
 
+            // the NI number must begin with two alphabetic characters
+            if (nINumber.Substring(0,2).All(Char.IsLetter) == false)
+            {                
+                    Error = Error + "The NI number must start with two alphabetic characters : ";
+            }
 
+            // the NI number must have six digits as its third to eighth characters
+            // Notice that we must check that the string is at least eight
+            // characters long before we check that characters three-through-eight
+            // are digits
+            if (nINumber.Length > 7)
+            {
+                if (nINumber.Substring(2, 6).All(Char.IsDigit) == false)
+                {
+                    Error = Error + "The NI number must have six digits as its third to eighth characters : ";
+                }
+            }
 
-
+            // the NI number must end with an alphabetic character
+            // Notice that we cannot just check the eighth character since the user might enter a short string: we
+            // need to calculate the last character based on the string length
+            if (nINumber.Substring(nINumber.Length -1, 1).All(Char.IsLetter) == false)
+            {
+                Error = Error + "The NI number must end with one alphabetic character : ";
+            }
 
             // return any error messages
             return Error;
