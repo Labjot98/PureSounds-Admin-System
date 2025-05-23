@@ -13,16 +13,25 @@ namespace ClassLibrary
         public clsStockCollection()
         {
 
+          //object for data connection
+          clsDataConnection DB = new clsDataConnection();
+            DB.Execute("sproc_tblHeadphone_SelectAll");
+            PopuateArray(DB);
+
+
+        }
+        void PopuateArray(clsDataConnection DB)
+        {
             Int32 Index = 0;
             Int32 RecordCount = 0;
-            clsDataConnection DB = new clsDataConnection();
-            DB.Execute("sproc_tblHeadPhone_selectAll");
-
             RecordCount = DB.Count;
+            mStockList = new List<clsStock1>();
 
+            //while there are no records to process
             while (Index < RecordCount)
             {
                 clsStock1 AStock = new clsStock1();
+
 
                 AStock.Bluetooth = Convert.ToBoolean(DB.DataTable.Rows[Index]["Bluetooth"]);
                 AStock.ItemID = Convert.ToInt32(DB.DataTable.Rows[Index]["ItemID"]);
@@ -35,7 +44,6 @@ namespace ClassLibrary
                 mStockList.Add(AStock);
                 Index++;
             }
-
         }
 
 
@@ -91,6 +99,20 @@ namespace ClassLibrary
             DB.AddParameter("@ItemID", mThisStock.ItemID);
             //execute stored procedure
             DB.Execute("sproc_tblHeadPhone_Delete");
+        }
+
+        public void ReportByItemName(string ItemName)
+        {
+            //filters record based on a full or partial ItemNme
+            //connect to the databse
+            clsDataConnection DB = new clsDataConnection();
+            //send the postcode parameter to the databse
+            DB.AddParameter("@ItemName", ItemName);
+            //execute the stored procedure
+            DB.Execute("sproc_tblHeadPhone_FilterByItemName");
+            //populate the arraylist with the data table
+            PopuateArray(DB);
+
         }
 
         public void Update()

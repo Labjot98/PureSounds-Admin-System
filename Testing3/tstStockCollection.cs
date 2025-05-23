@@ -34,7 +34,7 @@ namespace Testing3
             clsStock1 TestItem = new clsStock1();
             TestItem.Bluetooth = true;
             TestItem.ItemID = 1;
-            TestItem.ItemName = "testing";
+            TestItem.ItemName = "testinggg";
             TestItem.DatePosted = DateTime.Now;
             TestItem.Brand = "testingbrand";
             TestItem.Quantity = 40;
@@ -58,7 +58,7 @@ namespace Testing3
             clsStock1 TestStock = new clsStock1();
             TestStock.Bluetooth = true;
             TestStock.ItemID = 1;
-            TestStock.ItemName = "testing";
+            TestStock.ItemName = "testinggg";
             TestStock.DatePosted = DateTime.Now;
             TestStock.Brand = "testingbrand";
             TestStock.Quantity = 40;
@@ -80,7 +80,7 @@ namespace Testing3
             clsStock1 TestItem = new clsStock1();
             TestItem.Bluetooth = true;
             TestItem.ItemID = 1;
-            TestItem.ItemName = "testing";
+            TestItem.ItemName = "testinggg";
             TestItem.DatePosted = DateTime.Now;
             TestItem.Brand = "testingbrand";
             TestItem.Quantity = 40;
@@ -107,7 +107,7 @@ namespace Testing3
             clsStock1 TestItem = new clsStock1();
             TestItem.Bluetooth = true;
             TestItem.ItemID = 1;
-            TestItem.ItemName = "testingAgain";
+            TestItem.ItemName = "testingAga";
             TestItem.DatePosted = DateTime.Now;
             TestItem.Brand = "testingbrand 3.0";
             TestItem.Quantity = 40;
@@ -201,6 +201,60 @@ namespace Testing3
             //test to see the record was not found
             Assert.IsFalse (Found);
 
+        }
+
+        [TestMethod]
+        public void ReportByItemNameOK()
+        {
+            //Create an instance of the class
+            clsStockCollection ALLStock = new clsStockCollection ();
+            //create instance of the filtered data
+            clsStockCollection FilteredStock = new clsStockCollection ();
+            //apply a blank string (should return all records)
+            FilteredStock.ReportByItemName("");
+            //test to see the two attributes are the same
+            Assert.AreEqual(FilteredStock.Count, ALLStock.Count);
+        }
+
+        [TestMethod]
+        public void ReportByItemNameNoneFound()
+        {
+            //create instance of the filtered data
+            clsStockCollection FilteredStock = new clsStockCollection();
+            //apply a itemname that dosent exist
+            FilteredStock.ReportByItemName("qwert trewq");
+            //test to see the two attributes are the same
+            Assert.AreEqual(0, FilteredStock.Count);
+        }
+
+        [TestMethod]
+        public void ReportByItemNameTestDataFound()
+        {
+            //create an instance if the following data
+            clsStockCollection FilteredStock = new clsStockCollection();
+            Boolean OK = true;
+
+            //apply an itemname that dosent exist
+            FilteredStock.ReportByItemName("testingAgain");
+            //check the correct number of records is found
+
+            if(FilteredStock.Count == 2)
+            {
+                if (FilteredStock.StockList[0].ItemID != 7)
+                {
+                    OK = false;
+                }
+                if (FilteredStock.StockList[1].ItemID != 9)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            //test to see there are no records
+            Assert.IsTrue(OK);
         }
 
 
