@@ -4,38 +4,43 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
-    <style type="text/css">
-        #form1 {
-            height: 485px;
-        }
-    </style>
+    <title>Customer List</title>
+
+    <!--CSS File -->
+    <link rel="stylesheet" href="./Styles/ListStyles.css"/>
+
+    <!--Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
     <form id="form1" runat="server">
-        <div>
-        </div>
 
-        <asp:ListBox runat="server" ID="lstCustomerList" Height="240px" Width="260px"></asp:ListBox>
+        <div class="filter-main-cont">
+            <div class="filter-input-cont">
+                <asp:Label ID="lblFilterFullname" runat="server" Text="Enter a name"></asp:Label>
+                <asp:TextBox ID="txtFilterFullname" runat="server" ></asp:TextBox>
 
-        <p>
-        <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" style="z-index: 1; width: 60px" Text="Add" />
-        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" style="z-index: 1; width: 60px; margin-left:60px" Text="Edit" />
-        <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" style="z-index: 1; width: 60px; margin-left:60px" Text="Delete" />
-        </p>
-
-        <div>
-            <asp:Label ID="lblFilterFullname" runat="server" style="top:350px; position:absolute" Text="Enter a name"></asp:Label>
-            <asp:TextBox ID="txtFilterFullname" runat="server" style="width: 220px; top:350px; left:100px; position:absolute"></asp:TextBox>
-
-            <div>
-                 <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" style="width: 100px; position:absolute; top:400px; left: 70px;" Text="Apply Filter" />
-                 <asp:Button ID="btnClearFilter" runat="server" OnClick="btnClearFilter_Click" style="width: 100px; position:absolute; top:400px; left: 180px;" Text="Clear Filter" />
+            </div>
+            <div class="apply-filter-btn-cont">
+                 <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" Text="Apply Filter" />
+                 <asp:Button ID="btnClearFilter" runat="server" OnClick="btnClearFilter_Click" Text="Clear Filter" />
             </div>
         </div>
 
-        <asp:Label ID="lblError" runat="server" style="width:100px; position:absolute; top:450px"></asp:Label>
+        <asp:ListBox runat="server" ID="lstCustomerList" ></asp:ListBox>
+
+        <div class="bottom-btn-cont">
+        <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
+        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="Edit" />
+        <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click"  Text="Delete" />
+        </div>
+
+
+
+        <asp:Label ID="lblError" runat="server" ></asp:Label>
      
     </form>
 </body>

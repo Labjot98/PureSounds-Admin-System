@@ -4,23 +4,43 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Login Page</title>
+
+    <!--CSS File -->
+    <link rel="stylesheet" href="./Styles/LoginStyles.css"/>
+
+    <!--Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 </head>
-<body style="height: 260px">
+<body>
     <form id="form1" runat="server">
-        <div>
+        <div class="img-cont">
+            <img src="https://images.pexels.com/photos/3756771/pexels-photo-3756771.jpeg?auto=compress&cs=tinysrgb&w=600" alt="This is an image"/>
+        </div>
+        <div class="main-cont">
             <h2>Customer System Login</h2>
+            <p>Enter username and password to access your account</p>
 
-            <asp:Label ID="lblUserName" runat="server" style="z-index: 1; left: 60px; top: 80px; position: absolute" Text="UserName"></asp:Label>
-            <asp:TextBox ID="txtUserName" runat="server" style="z-index: 1; left: 160px; top: 80px; position: absolute; width: 220px"></asp:TextBox>
+            <div class="input-field">
+                <asp:Label ID="lblUserName" runat="server" Text="Username"></asp:Label> 
+                <asp:TextBox ID="txtUserName" runat="server"></asp:TextBox>  
+            </div>
 
-            <asp:Label ID="lblPassword" runat="server" style="z-index: 1; left: 60px; top: 120px; position: absolute" Text="Password"></asp:Label>
-            <asp:TextBox ID="txtPassword" runat="server" style="z-index: 1; left: 160px; top: 120px; position: absolute; width: 220px" TextMode="Password"></asp:TextBox>
+            <div class="input-field">
+                <asp:Label ID="lblPassword" runat="server" Text="Password"></asp:Label>
+                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox> 
+            </div>
 
-            <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" style="z-index: 1; left: 160px; top: 180px; position: absolute; width: 60px" Text="Login" />
-            <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 270px; top: 180px; position: absolute; width: 60px" Text="Cancel" />
+            <div class="btn-cont">
+                <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Login" />
+                <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" /> 
+            </div>
 
-            <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 60px; top: 240px; position: absolute" ForeColor="Red"></asp:Label>
+            <div class="error-cont">
+                <asp:Label ID="lblError" runat="server" ></asp:Label>
+            </div>
         </div>
     </form>
 </body>

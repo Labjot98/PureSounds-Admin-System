@@ -1,0 +1,100 @@
+﻿body {
+    font-family: "Roboto", sans-serif;
+    background-color: #f9f9f9;
+}
+form {
+    width: 70vw;
+    margin: 100px auto auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.8);
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.filter-main-cont {
+    width:100%;
+    background-color: #e18c21;
+    height:140px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+}
+.filter-input-cont{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+#lblFilterFullname {
+    font-size: 20px;
+}
+#txtFilterFullname {
+    font-size: 18px;
+    color: gray;
+    width: 280px;
+    height: 28px;
+    outline: none;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 5px;
+}
+.apply-filter-btn-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+#btnApplyFilter, #btnClearFilter {
+    font-size: 16px;
+    height: 40px;
+    border:none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    transition: border 2s ease;
+    padding: 8px;
+}
+#btnApplyFilter:hover, #btnClearFilter:hover {
+    border: 1px solid white;
+}
+#lstCustomerList {
+    background-color: #F0F0F0;
+    width: 100%;
+    height: 300px;
+    margin-top: 14px;
+    font-size: 16px;
+    padding: 10px;
+}
+.bottom-btn-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin:14px 0px;
+}
+#btnAdd, #btnEdit, #btnDelete {
+    font-size: 16px;
+    width:80px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #e18c21;
+    color: white;
+    transition: border 2s ease;
+    padding: 8px;
+}
+#btnAdd:hover, #btnEdit:hover, #btnDelete:hover {
+    border: 1px solid black;
+}
+#lblError {
+    font-size: 20px;
+    color: red;
+}

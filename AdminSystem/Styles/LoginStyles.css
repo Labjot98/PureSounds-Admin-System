@@ -1,0 +1,95 @@
+﻿body {
+    font-family: "Roboto", sans-serif;
+    background-color: #f9f9f9;
+}
+
+form {
+    width: fit-content;
+    margin: 100px auto auto auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.img-cont{
+    height:500px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.img-cont img {
+    height: 532px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.main-cont{
+    width:400px;
+    height:500px;
+    padding:16px;
+}
+h2{
+    text-align:center;
+    font-size:36px;
+    margin-bottom:16px;
+}
+p {
+    font-size: 14px;
+    color: #CECCCC;
+    text-align:center;
+    margin-bottom:40px;
+}
+.input-field{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+    margin:30px 0px;
+}
+#lblUserName, #lblPassword{
+    font-size:20px;
+}
+#txtUserName, #txtPassword{
+    font-size:18px;
+    color:gray;
+    width:200px;
+    height:28px;
+    outline:none;
+    border:1px solid #ccc;
+    border-radius:10px;
+    padding:5px;
+}
+.btn-cont{
+    margin:80px auto 20px auto;
+    width:300px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-content:center;
+    gap:16px;
+}
+#btnLogin, #btnCancel {
+    font-size: 18px;
+    border: none;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #e18c21;
+    color: white;
+    transition: border 1s ease;
+}
+#btnLogin:hover, #btnCancel:hover{
+    border:1px solid black;
+}
+.error-cont{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#lblError {
+    font-size: 20px;
+    color:red;
+}
