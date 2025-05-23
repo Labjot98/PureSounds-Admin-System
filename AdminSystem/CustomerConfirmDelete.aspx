@@ -4,18 +4,27 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Confirm Delete</title>
+
+    <!--CSS File -->
+    <link rel="stylesheet" href="./Styles/DeleteStyles.css"/>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
+    <!--Font Awesome for delete icon-->
+    <script src="https://kit.fontawesome.com/75dd946e92.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
-   
+        <i class="fa-solid fa-trash fa-2xl delete-icon"></i>
         <asp:Label ID="lblConfirmDelete" runat="server" Text="Are you sure you want to delete this record?"></asp:Label>
-        <p>
-            <asp:Button ID="btnYes" runat="server" OnClick="btnYes_Click" style="z-index: 1; width: 60px; margin-left:60px" Text="Yes" />
-            <asp:Button ID="btnNo" runat="server" OnClick="btnNo_Click" style="z-index: 1; width: 60px; margin-left:60px" Text="No" />
-        </p>
+        <div class="btn-cont">
+            <asp:Button ID="btnYes" runat="server" OnClick="btnYes_Click" Text="Yes" />
+            <asp:Button ID="btnNo" runat="server" OnClick="btnNo_Click" Text="No" />
+        </div>
     </form>
 </body>
 </html>

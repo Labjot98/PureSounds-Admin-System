@@ -32,12 +32,12 @@ public partial class CustomerLogin : System.Web.UI.Page
         if (txtUserName.Text == "")
         {
             // record the error
-            lblError.Text = "Enter a username ";
+            lblError.Text = "Please enter a username ";
         }
         else if (txtPassword.Text == "")
         {
             // record the error
-            lblError.Text = "Enter a password ";
+            lblError.Text = "Please enter a password ";
         }
         // if found
         else if (Found == true)
@@ -59,5 +59,10 @@ public partial class CustomerLogin : System.Web.UI.Page
             // record the error
             lblError.Text = "Login details are incorrect. Please try again ";
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CustomerLogin.aspx");
     }
 }

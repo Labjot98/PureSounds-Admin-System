@@ -4,38 +4,65 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Customer Data Entry</title>
+
+    <!--CSS File -->
+    <link rel="stylesheet" href="./Styles/DataEntryStyles.css"/>
+
+    <!--Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+
+        <div class="left-cont">
+            <div class="input-field">
+                <asp:Label ID="lblCustomerId" runat="server" class="lbl" Text="Customer ID"></asp:Label>
+                <asp:TextBox ID="txtCustomerId" runat="server" class="txtBox" ></asp:TextBox>
+            </div>
+
+            <div class="input-field">
+                <asp:Label ID="lblCustomerFullname" runat="server" class="lbl" Text="Customer Fullname"></asp:Label>
+                <asp:TextBox ID="txtCustomerFullname" runat="server" class="txtBox"></asp:TextBox>
+            </div>
+       
+            <div class="input-field">
+                <asp:Label ID="lblEmail" runat="server" class="lbl" Text="Email"></asp:Label>
+                <asp:TextBox ID="txtEmail" runat="server" class="txtBox"></asp:TextBox>
+            </div>
+        
+            <div class="input-field">
+                <asp:Label ID="lblAddress" runat="server" class="lbl" Text="Address"></asp:Label>
+                <asp:TextBox ID="txtAddress" runat="server" class="txtBox"></asp:TextBox>
+            </div>
+        
+            <div class="input-field">
+                <asp:Label ID="lblPassword" runat="server" class="lbl" Text="Password"></asp:Label>
+                <asp:TextBox ID="txtPassword" runat="server" class="txtBox"></asp:TextBox>
+            </div>
+
+            <div class="input-field">
+                <asp:Label ID="lblCreatedOn" runat="server" class="lbl" Text="Created On"></asp:Label>
+                <asp:TextBox ID="txtCreatedOn" runat="server" class="txtBox"></asp:TextBox>
+            </div>
+        
+            <div class="chkBox">
+                <asp:CheckBox ID="chkBonusEligibility" runat="server" Text=" Bonus Eligibility" />
+            </div>
+
+            <div class="bottom-btn-cont">
+                <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="OK" />
+                <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+            </div>
+
+            <asp:Label ID="lblError" runat="server" ></asp:Label>
         </div>
 
-        <asp:Label ID="lblCustomerId" runat="server" style="z-index: 1; left: 14px; top: 35px; position: absolute" Text="Customer ID"></asp:Label>
-        <asp:TextBox ID="txtCustomerId" runat="server" style="z-index: 1; left: 160px; top: 35px; position: absolute; width: 220px"></asp:TextBox>
-        <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" style="z-index: 1; left: 420px; top: 32px; position: absolute; width: 60px" Text="Find" />
-
-        <asp:Label ID="lblCustomerFullname" runat="server" style="z-index: 1; left: 14px; top: 70px; position: absolute" Text="Customer Fullname"></asp:Label>
-        <asp:TextBox ID="txtCustomerFullname" runat="server" style="z-index: 1; left: 160px; top: 70px; position: absolute; width: 220px"></asp:TextBox>
-       
-        <asp:Label ID="lblEmail" runat="server" style="z-index: 1; left: 14px; top: 105px; position: absolute" Text="Email"></asp:Label>
-        <asp:TextBox ID="txtEmail" runat="server" style="z-index: 1; left: 160px; top: 105px; position: absolute; width: 220px"></asp:TextBox>
-        
-        <asp:Label ID="lblAddress" runat="server" style="z-index: 1; left: 14px; top: 140px; position: absolute" Text="Address"></asp:Label>
-        <asp:TextBox ID="txtAddress" runat="server" style="z-index: 1; left: 160px; top: 140px; position: absolute; width: 220px"></asp:TextBox>
-        
-        <asp:Label ID="lblPassword" runat="server" style="z-index: 1; left: 14px; top: 175px; position: absolute" Text="Password"></asp:Label>
-        <asp:TextBox ID="txtPassword" runat="server" style="z-index: 1; left: 160px; top: 175px; position: absolute; width: 220px"></asp:TextBox>
-        
-        <asp:Label ID="lblCreatedOn" runat="server" style="z-index: 1; left: 14px; top: 210px; position: absolute; height: 19px" Text="Created On"></asp:Label>
-        <asp:TextBox ID="txtCreatedOn" runat="server" style="z-index: 1; left: 160px; top: 210px; position: absolute; width: 220px"></asp:TextBox>
-        
-        <asp:CheckBox ID="chkBonusEligibility" runat="server" style="z-index: 1; left: 160px; top: 245px; position: absolute" Text=" Bonus Eligibility" />
-
-        <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 14px; top: 280px; position: absolute"></asp:Label>
-
-        <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 14px; top: 315px; position: absolute; width: 60px" Text="OK" />
-        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 100px; top: 315px; width: 60px; position: absolute" Text="Cancel" />
+        <div class="right-cont">
+            <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="Find" />
+        </div>
 
     </form>
 </body>

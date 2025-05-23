@@ -133,26 +133,44 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a variable to store the result of the find operation
         Boolean Found = false;
 
-        //get the primary key entered by the user
-        CustomerId = Convert.ToInt32(txtCustomerId.Text);
-
-        //find the record
-        Found = ACustomer.Find(CustomerId);
-
-        //if found
-        if (Found == true)
+        if(txtCustomerId.Text.Length == 0 )
         {
-            //display the values of the properties in the form
-            txtCustomerFullname.Text = ACustomer.CustomerFullname;
-            txtEmail.Text = ACustomer.Email;
-            txtAddress.Text = ACustomer.Address;
-            txtPassword.Text = ACustomer.Password;
-            txtCreatedOn.Text = ACustomer.CreatedOn.ToString();
-            chkBonusEligibility.Checked = ACustomer.BonusEligibility;
+            lblError.Text = "Please enter a customer id";
         }
         else
         {
-            lblError.Text = "Error";
+            //get the primary key entered by the user
+            CustomerId = Convert.ToInt32(txtCustomerId.Text);
+
+            //find the record
+            Found = ACustomer.Find(CustomerId);
+
+            //if found
+            if (Found == true)
+            {
+                //display the values of the properties in the form
+                txtCustomerFullname.Text = ACustomer.CustomerFullname;
+                txtEmail.Text = ACustomer.Email;
+                txtAddress.Text = ACustomer.Address;
+                txtPassword.Text = ACustomer.Password;
+                txtCreatedOn.Text = ACustomer.CreatedOn.ToString();
+                chkBonusEligibility.Checked = ACustomer.BonusEligibility;
+                lblError.Text = "";
+            }
+            else
+            {
+                lblError.Text = "Error: Record does not exist";
+                txtCustomerFullname.Text = "";
+                txtEmail.Text = "";
+                txtAddress.Text = "";
+                txtPassword.Text = "";
+                txtCreatedOn.Text = "";
+            }
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CustomerList.aspx");
     }
 }
