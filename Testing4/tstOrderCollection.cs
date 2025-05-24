@@ -104,5 +104,91 @@ namespace Testing4
             //test to see that the two values are the same
             Assert.AreEqual(AllOrders.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            // Create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // Create the item of test data
+            clsOrder TestItem = new clsOrder();
+
+            // Variable to store the primary key (OrderId)
+            Int32 PrimaryKey = 0;
+
+            // Set the properties of the test data
+            TestItem.CustomerId = 1;
+            TestItem.OrderDate = DateTime.Now;
+            TestItem.TotalAmount = 100.00m;
+            TestItem.Status = "Pending";
+            TestItem.DiscountApplied = true;
+            TestItem.PaymentMethod = "Credit Card";
+
+            // Set ThisOrder to the test data
+            AllOrders.ThisOrder = TestItem;
+
+            // Add the record
+            PrimaryKey = AllOrders.Add(); 
+
+            // Set the primary key of the test data
+            TestItem.OrderId = PrimaryKey;
+
+            // Find the record
+            AllOrders.ThisOrder.Find(PrimaryKey);
+
+            // Test to see that the two values are equal
+            Assert.AreEqual(AllOrders.ThisOrder, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            // Create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // Create the item of test data
+            clsOrder TestItem = new clsOrder();
+
+            // Variable to store the primary key (OrderId)
+            Int32 PrimaryKey = 0;
+
+            // Set its properties (initial test data)
+            TestItem.CustomerId = 1;
+            TestItem.OrderDate = DateTime.Now;
+            TestItem.TotalAmount = 150.50m;
+            TestItem.Status = "Processing";
+            TestItem.DiscountApplied = false;
+            TestItem.PaymentMethod = "Credit Card";
+
+            // Set ThisOrder to the test data
+            AllOrders.ThisOrder = TestItem;
+
+            // Add the record
+            PrimaryKey = AllOrders.Add();
+
+            // Set the primary key of the test data (OrderId)
+            TestItem.OrderId = PrimaryKey;
+
+            // Modify the test record (update the data)
+            TestItem.CustomerId = 2;
+            TestItem.OrderDate = DateTime.Now;
+            TestItem.TotalAmount = 250.75m;
+            TestItem.Status = "Shipped";
+            TestItem.DiscountApplied = true;
+            TestItem.PaymentMethod = "PayPal";
+
+            // Set the record based on the new test data
+            AllOrders.ThisOrder = TestItem;
+
+            // Update the record
+            AllOrders.Update();
+
+            // Find the record using the primary key (OrderId)
+            AllOrders.ThisOrder.Find(PrimaryKey);
+
+            // Test to see if ThisOrder matches the test data
+            Assert.AreEqual(AllOrders.ThisOrder, TestItem);
+        }
     }
 }
