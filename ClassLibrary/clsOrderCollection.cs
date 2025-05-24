@@ -7,70 +7,12 @@ namespace ClassLibrary
     {
         public clsOrderCollection()
         {
-            //variable for the index
-            Int32 Index = 0;
-
-            //variable to store the record count
-            Int32 RecordCount = 0;
-
-            //creating the db connection
+            // object for the data connection
             clsDataConnection DB = new clsDataConnection();
-
-            //execute the stored procedure
+            // execute the stored procedure to fetch all orders
             DB.Execute("sproc_tblOrder_SelectAll");
-
-            //get the count of records
-            RecordCount = DB.Count;
-
-            //while there are records to process
-            while (Index < RecordCount)
-            {
-                //create a blank Order
-                clsOrder AnOrder = new clsOrder();
-
-                //read in the fields for the current record
-                AnOrder.OrderId = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderId"]);
-                AnOrder.CustomerId = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerId"]);
-                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
-                AnOrder.TotalAmount = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalAmount"]);
-                AnOrder.Status = Convert.ToString(DB.DataTable.Rows[Index]["Status"]);
-                AnOrder.DiscountApplied = Convert.ToBoolean(DB.DataTable.Rows[Index]["DiscountApplied"]);
-                AnOrder.PaymentMethod = Convert.ToString(DB.DataTable.Rows[Index]["PaymentMethod"]);
-
-                //add the record to the private data member
-                mOrderList.Add(AnOrder);
-
-                //point to next record
-                Index++;
-            }
-
-            //create the items to test data
-            clsOrder TestOrder = new clsOrder();
-            //set its properties
-            TestOrder.OrderId = 1;
-            TestOrder.CustomerId = 1;
-            TestOrder.OrderDate = DateTime.Now;
-            TestOrder.TotalAmount = 100.00M;
-            TestOrder.Status = "Pending";
-            TestOrder.DiscountApplied = true;
-            TestOrder.PaymentMethod = "Credit Card";
-
-            //add the test item to the test list
-            mOrderList.Add(TestOrder);
-
-            //re initialise the object
-            TestOrder = new clsOrder();
-            //set its properties
-            TestOrder.OrderId = 2;
-            TestOrder.CustomerId = 2;
-            TestOrder.OrderDate = DateTime.Now;
-            TestOrder.TotalAmount = 200.00M;
-            TestOrder.Status = "Shipped";
-            TestOrder.DiscountApplied = false;
-            TestOrder.PaymentMethod = "PayPal";
-
-            //add the test item to the test list
-            mOrderList.Add(TestOrder);
+            // populate the order list with the table data
+            PopulateOrderArray(DB);
         }
 
 
@@ -157,6 +99,63 @@ namespace ClassLibrary
 
             // Execute the stored procedure
             DB.Execute("sproc_tblOrder_Update");
+        }
+
+        public void Delete()
+        {
+            // Deletes the record pointed to by ThisOrder
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // Set the parameter for the stored procedure
+            DB.AddParameter("@OrderId", mThisOrder.OrderId);
+
+            // Execute the stored procedure to delete the order
+            DB.Execute("sproc_tblOrder_Delete");
+        }
+
+        public void ReportByOrderDate(string OrderDate)
+        {
+            // filters the records based on a specific OrderDate (or partial Date if needed)
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // send the OrderDate parameter to the database
+            DB.AddParameter("@OrderDate", OrderDate);  // you could use a DateTime or string depending on your format
+                                                       // execute the stored procedure
+            DB.Execute("sproc_tblOrder_FilterByOrderDate");
+            // populate the array list with the filtered table data
+            PopulateOrderArray(DB);
+        }
+
+        void PopulateOrderArray(clsDataConnection DB)
+        {
+            // populates the array list based on the data table in the parameter DB
+            // variable for the index
+            Int32 Index = 0;
+            // variable to store the record count
+            Int32 RecordCount;
+            // get the count of records
+            RecordCount = DB.Count;
+            // clear the private order list
+            mOrderList = new List<clsOrder>();
+            // while there are records to process
+            while (Index < RecordCount)
+            {
+                // create a blank Order object
+                clsOrder AnOrder = new clsOrder();
+                // read in the fields from the current record
+                AnOrder.OrderId = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderId"]);
+                AnOrder.CustomerId = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerId"]);
+                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+                AnOrder.TotalAmount = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalAmount"]);
+                AnOrder.Status = Convert.ToString(DB.DataTable.Rows[Index]["Status"]);
+                AnOrder.DiscountApplied = Convert.ToBoolean(DB.DataTable.Rows[Index]["DiscountApplied"]);
+                AnOrder.PaymentMethod = Convert.ToString(DB.DataTable.Rows[Index]["PaymentMethod"]);
+                // add the record to the private data member
+                mOrderList.Add(AnOrder);
+                // point at the next record
+                Index++;
+            }
         }
     }
 }

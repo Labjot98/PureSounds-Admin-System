@@ -13,8 +13,19 @@
         <div>
             <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
             <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="Edit" />
-
+            <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" />
         </div>
+
+        <div>
+            <asp:Label ID="lblFilter" runat="server" Text="Enter a date: "></asp:Label>
+            <asp:TextBox ID="txtFilter" runat="server" ></asp:TextBox>
+        </div>
+
+        <div>
+            <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" Text="Apply Filter" />
+            <asp:Button ID="btnClearFilter" runat="server" OnClick="btnClearFilter_Click" Text="Clear Filter" />
+        </div>
+
         <div>
             <asp:Label ID="lblError" runat="server"></asp:Label>
         </div>

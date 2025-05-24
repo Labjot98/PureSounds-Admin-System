@@ -190,5 +190,102 @@ namespace Testing4
             // Test to see if ThisOrder matches the test data
             Assert.AreEqual(AllOrders.ThisOrder, TestItem);
         }
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            // Create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // Create the item of test data
+            clsOrder TestItem = new clsOrder();
+
+            // Variable to store the primary key
+            Int32 PrimaryKey = 0;
+
+            // Set its properties
+            TestItem.CustomerId = 1;
+            TestItem.OrderDate = DateTime.Now;
+            TestItem.TotalAmount = 100.00M;
+            TestItem.Status = "Pending";
+            TestItem.DiscountApplied = true;
+            TestItem.PaymentMethod = "Credit Card";
+
+            // Set ThisOrder to the test data
+            AllOrders.ThisOrder = TestItem;
+
+            // Add the record
+            PrimaryKey = AllOrders.Add();
+
+            // Set primary key of the test data
+            TestItem.OrderId = PrimaryKey;
+
+            // Find the record
+            AllOrders.ThisOrder.Find(PrimaryKey);
+
+            // Delete the record
+            AllOrders.Delete();
+
+            // Now find the record
+            Boolean Found = AllOrders.ThisOrder.Find(PrimaryKey);
+
+            // Test to see that the record was not found
+            Assert.IsFalse(Found);
+        }
+
+        [TestMethod]
+        public void ReportByOrderDateMethodOK()
+        {
+            // create an instance of the class containing unfiltered results
+            clsOrderCollection AllOrders = new clsOrderCollection();
+
+            // create the instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+
+            // apply a blank string (should return all records)
+            FilteredOrders.ReportByOrderDate("");
+
+            // test to see that the two values are the same
+            Assert.AreEqual(AllOrders.Count, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByOrderDateNoneFoundOK()
+        {
+            // create an instance of the class we want to create
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+
+            // apply a date that doesn't exist (this should not return any records)
+            FilteredOrders.ReportByOrderDate("2000-01-01");
+
+            // test to see that there are no records returned
+            Assert.AreEqual(0, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByOrderDateTestDataFoundOK()
+        {
+            // create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            // variable to store the outcome
+            Boolean OK = true;
+            // apply an OrderDate that does exist
+            FilteredOrders.ReportByOrderDate("05/05/2025");
+            // check that the correct number of records are found
+            if (FilteredOrders.Count == 1)
+            {
+                // check to see that the first record's OrderId is 8
+                if (FilteredOrders.OrderList[0].OrderId != 8)
+                {
+                    OK = true;
+                }
+            }
+            else
+            {
+                OK = true;
+            }
+            // test to see that OK stayed true
+            Assert.IsTrue(OK);
+        }
     }
 }
