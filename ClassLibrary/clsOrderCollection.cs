@@ -77,7 +77,10 @@ namespace ClassLibrary
 
 
         //private data member for the list
-        private List<clsOrder> mOrderList = new List<clsOrder>();
+        List<clsOrder> mOrderList = new List<clsOrder>();
+
+        //private data member for this Order
+        clsOrder mThisOrder = new clsOrder();
 
         //public property for the order list
         public List<clsOrder> OrderList
@@ -108,6 +111,52 @@ namespace ClassLibrary
         }
 
         //public property for the current order being worked with
-        public clsOrder ThisOrder { get; set; }
+        public clsOrder ThisOrder
+        {
+            get
+            {
+                return mThisOrder;
+            }
+            set
+            {
+                mThisOrder = value;
+            }
+        }
+
+        public int Add()
+        {
+            // Create a new instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+
+            // Set the parameters for the stored procedure using mThisOrder
+            DB.AddParameter("@CustomerId", mThisOrder.CustomerId);
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@TotalAmount", mThisOrder.TotalAmount);
+            DB.AddParameter("@Status", mThisOrder.Status);
+            DB.AddParameter("@DiscountApplied", mThisOrder.DiscountApplied);
+            DB.AddParameter("@PaymentMethod", mThisOrder.PaymentMethod);
+
+            // Execute the stored procedure and get the primary key (OrderId) returned by the stored procedure
+            return Convert.ToInt32(DB.Execute("sproc_tblOrder_Insert"));
+        }
+
+        public void Update()
+        {
+            // Update an existing record based on the values of ThisOrder
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // Set the parameters for the stored procedure
+            DB.AddParameter("@OrderId", mThisOrder.OrderId);
+            DB.AddParameter("@CustomerId", mThisOrder.CustomerId);
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@TotalAmount", mThisOrder.TotalAmount);
+            DB.AddParameter("@Status", mThisOrder.Status);
+            DB.AddParameter("@DiscountApplied", mThisOrder.DiscountApplied);
+            DB.AddParameter("@PaymentMethod", mThisOrder.PaymentMethod);
+
+            // Execute the stored procedure
+            DB.Execute("sproc_tblOrder_Update");
+        }
     }
 }

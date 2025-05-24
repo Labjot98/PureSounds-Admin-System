@@ -8,10 +8,16 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
+     
         <asp:ListBox runat="server" ID="lstOrderList" Height="240px" Width="260px"></asp:ListBox>
+        <div>
+            <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
+            <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="Edit" />
 
+        </div>
+        <div>
+            <asp:Label ID="lblError" runat="server"></asp:Label>
+        </div>
 
     </form>
 </body>
