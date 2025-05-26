@@ -17,6 +17,7 @@
         <br />
         <p>
             <asp:Label ID="lblError" runat="server"></asp:Label>
+            <asp:Button ID="btnReturnToMainMenu" runat="server" OnClick="btnReturnToMainMenu_Click" style="z-index: 1; left: 338px; top: 510px; position: absolute" Text="Return To Main Menu" />
         </p>
         <p>
             <asp:Label ID="lblFilter" runat="server" Text="Enter a name"></asp:Label>
@@ -26,7 +27,7 @@
             <asp:Button ID="btnClearFilter" runat="server" OnClick="btnClearFilter_Click" style="z-index: 1; left: 172px; top: 511px; position: absolute" Text="Clear Filter" />
         </p>
         <p>
-            <asp:TextBox ID="txtFilter" runat="server" style="z-index: 1; left: 119px; top: 405px; position: absolute; right: 605px"></asp:TextBox>
+            <asp:TextBox ID="txtFilter" runat="server" style="z-index: 1; left: 100px; top: 427px; position: absolute; height: 18px;"></asp:TextBox>
         </p>
     </form>
 </body>

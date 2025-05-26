@@ -19,7 +19,7 @@
         <asp:Label ID="lblNINumber" runat="server" style="z-index: 1; left: 27px; top: 348px; position: absolute" Text="NI Number" width="101px"></asp:Label>
         <asp:TextBox ID="txtNINumber" runat="server" style="z-index: 1; left: 142px; top: 348px; position: absolute"></asp:TextBox>
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 132px; top: 466px; position: absolute" Text="OK" />
-        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 202px; top: 467px; position: absolute" Text="Cancel" />
+        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 202px; top: 467px; position: absolute" Text="Cancel" OnClick="btnCancel_Click" />
         <asp:Label ID="lblName" runat="server" style="z-index: 1; left: 27px; top: 107px; position: absolute" Text="Name" width="101px"></asp:Label>
         <asp:TextBox ID="txtName" runat="server" style="z-index: 1; left: 142px; top: 103px; position: absolute"></asp:TextBox>
         <asp:Label ID="lblStaffID" runat="server" style="z-index: 1; left: 27px; top: 58px; position: absolute" Text="Staff ID" width="101px"></asp:Label>
@@ -62,6 +62,7 @@
             &nbsp;</p>
         <div style="margin-left: 200px">
             <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="Find" Width="54px" />
+            <asp:Button ID="btnReturnToMainMenu" runat="server" OnClick="btnReturnToMainMenu_Click" style="z-index: 1; left: 321px; top: 466px; position: absolute" Text="Return to Main Menu" />
         </div>
     </form>
 </body>
