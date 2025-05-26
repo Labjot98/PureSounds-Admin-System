@@ -141,4 +141,16 @@ public partial class _1_DataEntry : System.Web.UI.Page
             chkIsFemale.Checked = AStaff.IsFemale;
         }
     }
+
+    protected void btnReturnToMainMenu_Click(object sender, EventArgs e)
+    {
+        // redirect to the main menu
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        // return to List view
+        Response.Redirect("StaffList.aspx");
+    }
 }
