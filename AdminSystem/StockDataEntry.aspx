@@ -16,6 +16,7 @@
         </p>
         <asp:Label ID="lblItemName" runat="server" height="19px" style="z-index: 1; left: 24px; top: 123px; position: absolute" Text="Item Name" width="75px"></asp:Label>
         <asp:TextBox ID="txtItemName" runat="server" style="z-index: 1; left: 123px; top: 122px; position: absolute"></asp:TextBox>
+        <asp:Button ID="btnReturn" runat="server" OnClick="btnReturn_Click" style="z-index: 1; left: 150px; top: 362px; position: absolute; width: 179px" Text="Return To Main Menu" />
         <asp:Label ID="lblDatePosted" runat="server" style="z-index: 1; left: 24px; position: absolute; top: 158px" Text="Date Posted"></asp:Label>
         <asp:TextBox ID="txtDatePosted" runat="server" style="z-index: 1; left: 123px; top: 157px; position: absolute"></asp:TextBox>
         <asp:Label ID="lblQuantity" runat="server" height="19px" style="z-index: 1; left: 24px; top: 196px; position: absolute" Text="Quantity" width="75px"></asp:Label>
@@ -27,11 +28,11 @@
         <asp:CheckBox ID="chkBluetooth" runat="server" style="z-index: 1; left: 123px; top: 306px; position: absolute" Text="Bluetooth" />
         <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 18px; position: absolute; top: 327px"></asp:Label>
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 18px; top: 360px; position: absolute" Text="ok" />
-        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 58px; top: 361px; position: absolute" Text="Cancel" />
+        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 58px; top: 361px; position: absolute" Text="Cancel" OnClick="btnCancel_Click" />
         <p>
             &nbsp;</p>
         <p>
-        <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" style="z-index: 1; left: 76px; top: 512px; position: absolute" Text="Find" />
+        <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" style="z-index: 1; left: 304px; top: 259px; position: absolute" Text="Find" />
         </p>
     </form>
 </body>

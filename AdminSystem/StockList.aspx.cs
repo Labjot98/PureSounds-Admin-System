@@ -14,6 +14,12 @@ public partial class _1_List : System.Web.UI.Page
         {
             DisplayStock();
         }
+
+        //Create a new instance of clsStockUser
+        clsStockUser AnUser = new clsStockUser();
+        AnUser = (clsStockUser)Session["AnUser"];
+        //display the username
+        Response.Write("Logged in as: " + AnUser.UserName);
     }
 
     void DisplayStock()
@@ -101,5 +107,10 @@ public partial class _1_List : System.Web.UI.Page
         lstStockList.DataTextField = "ItemName";
         lstStockList.DataBind();
 
+    }
+
+    protected void btnReturn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
     }
 }
