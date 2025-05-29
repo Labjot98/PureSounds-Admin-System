@@ -872,6 +872,64 @@ namespace Testing1
             Assert.AreNotEqual(Error, "");
         }
 
+        [TestMethod]
+        public void NINumberNotAlphaInFirstPlace()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string NINumber = "1A123456A";
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
 
+        [TestMethod]
+        public void NINumberNotAlphaInSecondPlace()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string NINumber = "A1123456A";
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NINumberNotDigitInMiddle()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string NINumber = "AA123B56A";
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NINumberNotAlphaInFinalPlace()
+        {
+            // create an instance of the class we want to create
+            clsStaff AStaff = new clsStaff();
+            // create a variable to store the results of the validation
+            String Error = "";
+            // create some test data to pass to the method
+            string NINumber = "AA1234567";
+            // invoke the method
+            Error = AStaff.Valid(Name, DateJoined, DateLeft, Rank, NINumber);
+            // test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
     }
 }
