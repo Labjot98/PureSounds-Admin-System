@@ -1,0 +1,44 @@
+﻿body {
+    font-family: "Roboto", sans-serif;
+    background-color: #f9f9f9;
+}
+form {
+    width: 600px;
+    height: 400px;
+    margin: 100px auto auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-top:60px;
+}
+#lblHeading {
+    font-size: 36px;
+}
+.btnCont{
+    padding-top:60px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+}
+#btnCustomer, #btnOrders, #btnStaff, #btnStock, #btnSupplier {
+    font-size: 16px;
+    width: 84px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #e18c21;
+    color: white;
+    transition: border 2s ease;
+    padding: 8px;
+}
+#btnCustomer:hover, #btnOrders:hover, #btnStaff:hover, #btnStock:hover, #btnSupplier:hover {
+    border: 1px solid black;
+}
