@@ -27,6 +27,7 @@ public partial class StockLogin : System.Web.UI.Page
         Password = Convert.ToString(txtPassword.Text);
         //find the record
         Found = AnUser.FindUser(UserName, Password);
+        Session["AnUser"] = AnUser;
         if (txtUserName.Text == "")
         {
             lblError.Text = "Enter a UserName ";
