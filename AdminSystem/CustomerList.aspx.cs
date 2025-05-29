@@ -16,6 +16,15 @@ public partial class _1_List : System.Web.UI.Page
             //update the list box
             DisplayCustomers();
         }
+
+        //create a new instance of clsCustomerUser
+        clsCustomerUser AUser = new clsCustomerUser();
+
+        //get the data from the session object
+        AUser = (clsCustomerUser)Session["AUser"];
+
+        //display the username
+        Response.Write("Logged in as: " + AUser.UserName);
     }
 
     void DisplayCustomers()
@@ -89,6 +98,12 @@ public partial class _1_List : System.Web.UI.Page
         {
             lblError.Text = "Please select a record from the list to delete";
         }
+    }
+
+    protected void btnReturn_Click(object sender, EventArgs e)
+    {
+        //redirect to the main menu
+        Response.Redirect("TeamMainMenu.aspx");
     }
 
     protected void btnApplyFilter_Click(object sender, EventArgs e)

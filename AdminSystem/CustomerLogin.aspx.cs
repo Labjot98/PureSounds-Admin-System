@@ -28,6 +28,10 @@ public partial class CustomerLogin : System.Web.UI.Page
         Password = Convert.ToString(txtPassword.Text);
         // find the record
         Found = AUser.FindUser(UserName, Password);
+
+        //Add a session to capture the user name
+        Session["AUser"] = AUser;
+
         // if username and/or password is empty
         if (txtUserName.Text == "")
         {
@@ -63,6 +67,6 @@ public partial class CustomerLogin : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("CustomerLogin.aspx");
+        Response.Redirect("TeamMainMenu.aspx");
     }
 }
