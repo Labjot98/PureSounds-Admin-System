@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -26,8 +28,16 @@ public partial class StaffLogin : System.Web.UI.Page
         UserName = Convert.ToString(txtUserName.Text);
         // get the password entered by the user
         Password = Convert.ToString(txtPassword.Text);
+
+        // get the hash of the password the user is trying
+        SHA1 sha1Hash = SHA1.Create();
+        byte[] sourceBytes = Encoding.UTF8.GetBytes(Password);
+        byte[] hashBytes = sha1Hash.ComputeHash(sourceBytes);
+        string PasswordHash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+
+
         // find the record
-        Found = AnUser.FindUser(UserName, Password);
+        Found = AnUser.FindUser(UserName, PasswordHash);
         // Add a session to capture the user name
         Session["AnUser"] = AnUser;
         // if username and/or password is empty

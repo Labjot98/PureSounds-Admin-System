@@ -1,6 +1,8 @@
 ﻿using System;
 using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Testing1
 {
@@ -48,11 +50,11 @@ namespace Testing1
             // create an instance of the class we want to create
             clsStaffUser AnUser = new clsStaffUser();
             // create some test data to assign to the property
-            String TestData = "password123";
+            String TestData = "cbfdac6008f9cab4083784cbd1874f76618d2a97";
             // assign the data to the property
-            AnUser.Password = TestData;
+            AnUser.PasswordHash = TestData;
             // test to see that the two values are the same
-            Assert.AreEqual(AnUser.Password, TestData);
+            Assert.AreEqual(AnUser.PasswordHash, TestData);
         }
 
         [TestMethod]
@@ -78,8 +80,15 @@ namespace Testing1
             // create some test data to use with the method
             String UserName = "Dawn";
             String Password = "password123";
+
+            // get the hash of the password we're trying
+            SHA1 sha1Hash = SHA1.Create();
+            byte[] sourceBytes = Encoding.UTF8.GetBytes(Password);
+            byte[] hashBytes = sha1Hash.ComputeHash(sourceBytes);
+            string PasswordHash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+
             // invoke the method
-            Found = AnUser.FindUser(UserName, Password);
+            Found = AnUser.FindUser(UserName, PasswordHash);
             // test to see if the result is true
             Assert.IsTrue(Found);
         }
@@ -96,10 +105,17 @@ namespace Testing1
             // create some test data to use with the method
             string UserName = "Dawn";
             string Password = "password123";
+
+            // create the hash of the password we are trying
+            SHA1 sha1Hash = SHA1.Create();
+            byte[] sourceBytes = Encoding.UTF8.GetBytes(Password);
+            byte[] hashBytes = sha1Hash.ComputeHash(sourceBytes);
+            string PasswordHash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+
             // invoke the method
-            Found = AnUser.FindUser(UserName, Password);
+            Found = AnUser.FindUser(UserName, PasswordHash);
             // check the user ID and password properties
-            if (AnUser.UserName != UserName && AnUser.Password != Password)
+            if (AnUser.UserName != UserName && AnUser.PasswordHash != PasswordHash)
             {
                 OK = false;
             }
