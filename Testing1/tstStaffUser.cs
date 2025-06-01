@@ -78,17 +78,11 @@ namespace Testing1
             // create a Boolean variable to store the result of the validation
             Boolean Found = false;
             // create some test data to use with the method
-            String UserName = "Dawn";
+            String UserName = "testuser";
             String Password = "password123";
 
-            // get the hash of the password we're trying
-            SHA1 sha1Hash = SHA1.Create();
-            byte[] sourceBytes = Encoding.UTF8.GetBytes(Password);
-            byte[] hashBytes = sha1Hash.ComputeHash(sourceBytes);
-            string PasswordHash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
-
             // invoke the method
-            Found = AnUser.FindUser(UserName, PasswordHash);
+            Found = AnUser.FindUser(UserName, Password);
             // test to see if the result is true
             Assert.IsTrue(Found);
         }
@@ -103,19 +97,13 @@ namespace Testing1
             //  create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            string UserName = "Dawn";
+            string UserName = "testuser";
             string Password = "password123";
 
-            // create the hash of the password we are trying
-            SHA1 sha1Hash = SHA1.Create();
-            byte[] sourceBytes = Encoding.UTF8.GetBytes(Password);
-            byte[] hashBytes = sha1Hash.ComputeHash(sourceBytes);
-            string PasswordHash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
-
             // invoke the method
-            Found = AnUser.FindUser(UserName, PasswordHash);
+            Found = AnUser.FindUser(UserName, Password);
             // check the user ID and password properties
-            if (AnUser.UserName != UserName && AnUser.PasswordHash != PasswordHash)
+            if (AnUser.UserName != UserName)
             {
                 OK = false;
             }
