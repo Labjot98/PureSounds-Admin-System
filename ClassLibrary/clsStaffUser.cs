@@ -1,6 +1,8 @@
 ﻿using System;
 using System.CodeDom;
 using System.Security.AccessControl;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ClassLibrary
 {
@@ -90,19 +92,37 @@ namespace ClassLibrary
         }
 
 
-        public bool FindUser(string UserName, string PasswordHash)
+        public bool FindUser(string UserName, string Password)
         {
 
             // create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
             // add the parameters of the user username and password to search for
-            
             DB.AddParameter("@UserName", UserName);
-            DB.AddParameter("@PasswordHash", PasswordHash);
-            // execute the stored procedure
-            DB.Execute("sproc_tblUsers_FindUserNamePWHash");
-            // if one record is found (there should be either one or none)
-            if (DB.Count == 1)
+            // execute the stored procedure that pulls in an entire record just from the username (we now test the password here in the class method)
+            DB.Execute("sproc_tblUsersSaltedandHashed_FindRecordFromUserName");
+
+            // Authenticate the password present by user ...
+            // Get the hash and salt from the SQL table
+            string retrievedPasswordHash = Convert.ToString(DB.DataTable.Rows[0]["PasswordHash"]);
+            string retrievedSalt = Convert.ToString(DB.DataTable.Rows[0]["Salt"]);
+
+            // set a flag for whether we the passwords match
+            bool authenticated = false;
+
+            // create the hash of the presented_password+salt (with salt gotten from table for this user)
+            SHA1 sha1Hash = SHA1.Create();
+            byte[] sourceBytes = Encoding.UTF8.GetBytes(string.Concat(Password, retrievedSalt));
+            byte[] hashBytes = sha1Hash.ComputeHash(sourceBytes);
+            string PasswordHash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+
+            // compare the hash of the presented password (plus salt from table) with hash stored in the table
+            if (PasswordHash == retrievedPasswordHash)
+                {
+                authenticated = true;
+                }
+
+            if ((DB.Count == 1) && (authenticated == true))
             {
                 // copy the data from the database to the private data members
                 mUserID = Convert.ToInt32(DB.DataTable.Rows[0]["UserID"]);

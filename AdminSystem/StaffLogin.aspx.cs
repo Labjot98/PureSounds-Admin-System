@@ -29,15 +29,8 @@ public partial class StaffLogin : System.Web.UI.Page
         // get the password entered by the user
         Password = Convert.ToString(txtPassword.Text);
 
-        // get the hash of the password the user is trying
-        SHA1 sha1Hash = SHA1.Create();
-        byte[] sourceBytes = Encoding.UTF8.GetBytes(Password);
-        byte[] hashBytes = sha1Hash.ComputeHash(sourceBytes);
-        string PasswordHash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
-
-
         // find the record
-        Found = AnUser.FindUser(UserName, PasswordHash);
+        Found = AnUser.FindUser(UserName, Password);
         // Add a session to capture the user name
         Session["AnUser"] = AnUser;
         // if username and/or password is empty
