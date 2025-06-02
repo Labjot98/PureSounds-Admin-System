@@ -78,7 +78,7 @@ namespace Testing1
             // create a Boolean variable to store the result of the validation
             Boolean Found = false;
             // create some test data to use with the method
-            String UserName = "testuser";
+            String UserName = "Dawn";
             String Password = "password123";
 
             // invoke the method
@@ -97,7 +97,7 @@ namespace Testing1
             //  create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            string UserName = "testuser";
+            string UserName = "Gabriel";
             string Password = "password123";
 
             // invoke the method

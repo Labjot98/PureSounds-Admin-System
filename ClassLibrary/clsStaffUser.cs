@@ -97,20 +97,20 @@ namespace ClassLibrary
 
             // create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
-            // add the parameters of the user username and password to search for
+            // add the parameters of the user name
             DB.AddParameter("@UserName", UserName);
-            // execute the stored procedure that pulls in an entire record just from the username (we now test the password here in the class method)
+            // execute the new stored procedure that retrieves an entire record from the username (since we now test the password here in the class method)
             DB.Execute("sproc_tblUsersSaltedandHashed_FindRecordFromUserName");
 
-            // Authenticate the password present by user ...
-            // Get the hash and salt from the SQL table
+            // Authenticate the password presented by user ...
+            // First get the hash and salt retrieved from the SQL table
             string retrievedPasswordHash = Convert.ToString(DB.DataTable.Rows[0]["PasswordHash"]);
             string retrievedSalt = Convert.ToString(DB.DataTable.Rows[0]["Salt"]);
 
-            // set a flag for whether we the passwords match
+            // set a flag for whether the presented and password and the stored password match
             bool authenticated = false;
 
-            // create the hash of the presented_password+salt (with salt gotten from table for this user)
+            // create the hash of the presented_password+salt (having retrieved salt from table's record for this user)
             SHA1 sha1Hash = SHA1.Create();
             byte[] sourceBytes = Encoding.UTF8.GetBytes(string.Concat(Password, retrievedSalt));
             byte[] hashBytes = sha1Hash.ComputeHash(sourceBytes);
