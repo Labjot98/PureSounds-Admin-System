@@ -101,6 +101,11 @@ namespace ClassLibrary
             DB.AddParameter("@UserName", UserName);
             // execute the new stored procedure that retrieves an entire record from the username (since we now test the password here in the class method)
             DB.Execute("sproc_tblUsersSaltedandHashed_FindRecordFromUserName");
+            // If the SQL table for users has no record for this user, log in must terminate before trying process the missing record
+            if (DB.Count == 0)
+            {
+                return false;
+            }
 
             // Authenticate the password presented by user ...
             // First get the hash and salt retrieved from the SQL table
