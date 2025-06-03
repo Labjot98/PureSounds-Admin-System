@@ -317,7 +317,7 @@ namespace Testing2
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
-            //check the customer email
+            //check the customer data for this field
             if (ACustomer.BonusEligibility != false)
             {
                 OK = false;

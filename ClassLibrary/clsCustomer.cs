@@ -187,6 +187,16 @@ namespace ClassLibrary
                 Error = Error + "Customer email cannot be blank: ";
 
             }
+            if(email.Length > 0)
+            {
+                //if Email doesn't contain @ and .com
+                if (!email.Contains("@") || !email.Contains(".com"))
+                {
+                    {
+                        Error = Error + "Customer email must be valid:";
+                    }
+                }
+            }
             //if Email length is greater than 50
             if (email.Length > 50)
             {
@@ -194,6 +204,7 @@ namespace ClassLibrary
                     Error = Error + "Customer email must be less than 50 characters: ";
                 }
             }
+
 
             //if Address is blank
             if (address.Length == 0)
