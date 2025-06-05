@@ -24,7 +24,7 @@
         <div>
             <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" Text="Apply Filter" />
             <asp:Button ID="btnClearFilter" runat="server" OnClick="btnClearFilter_Click" Text="Clear Filter" />
-            <asp:Button ID="btnReturn" runat="server" Text="Return to the Main Menu" />
+            <asp:Button ID="btnReturn" runat="server" OnClick="btnReturn_Click"  Text="Return to the Main Menu" />
         </div>
 
         <div>

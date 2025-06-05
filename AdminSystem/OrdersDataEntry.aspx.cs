@@ -137,6 +137,12 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
+    protected void btnOK_Cancel(object sender, EventArgs e)
+    {
+        //redirect to the main menu
+        Response.Redirect("OrdersList.aspx");
+    }
+
     protected void btnFind_Click(object sender, EventArgs e)
     {
         //create an instance of the order class
@@ -165,4 +171,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblError.Text = "Order Id doesn't exist";
         }
     }
+    protected void btnReturn_Click(object sender, EventArgs e)
+    {
+        //redirect to the main menu
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
 }

@@ -35,7 +35,7 @@
         <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 20px; top: 284px; position: absolute"></asp:Label>
 
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 14px; top: 312px; position: absolute; width: 59px; height: 28px;" Text="OK" />
-        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 100px; top: 315px; width: 60px; position: absolute" Text="Cancel" />
+        <asp:Button ID="btnCancel" OnClick="btnOK_Cancel" runat="server" style="z-index: 1; left: 100px; top: 315px; width: 60px; position: absolute" Text="Cancel" />
         <p>
             &nbsp;</p>
         <p>
@@ -53,7 +53,7 @@
         <p>
             &nbsp;</p>
         <p>
-            <asp:Button ID="btnReturn" runat="server" Height="27px" style="margin-left: 195px" Text="Return to Main Menu" Width="141px" />
+            <asp:Button ID="btnReturn" runat="server" Height="27px" style="margin-left: 195px" OnClick="btnReturn_Click" Text="Return to Main Menu" Width="141px" />
         </p>
     </form>
 </body>
