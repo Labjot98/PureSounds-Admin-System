@@ -99,6 +99,12 @@ public partial class _1_List : System.Web.UI.Page
         }
     }
 
+    protected void btnReturn_Click(object sender, EventArgs e)
+    {
+        //redirect to the main menu
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
     protected void btnApplyFilter_Click(object sender, EventArgs e)
     {
         // create an instance of the Order Collection object
