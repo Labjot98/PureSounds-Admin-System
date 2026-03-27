@@ -317,7 +317,7 @@ namespace Testing2
             //invoke the method
             Found = ACustomer.Find(CustomerId);
 
-            //check the customer email
+            //check the customer data for this field
             if (ACustomer.BonusEligibility != false)
             {
                 OK = false;
@@ -560,7 +560,7 @@ namespace Testing2
             string Error = "";
 
             //create some test data to pass to the test
-            string Email = "aaaaaaaaaaaaaaaaaaaaaaaaa";       //this should trigger an ok
+            string Email = "aaaaaaaaaaaaaaa@gmail.com";       //this should trigger an ok
 
             //invoke the method
             Error = ACustomer.Valid(CustomerFullname, Email, Address, Password, CreatedOn);
@@ -579,7 +579,7 @@ namespace Testing2
             string Error = "";
 
             //create some test data to pass to the test
-            string Email = "aaaaaaaaaaaaaaaaaaaaaaaaaa";       //this should trigger an ok
+            string Email = "aaaaaaaaaaaaaaaa@gmail.com";       //this should trigger an ok
 
             //invoke the method
             Error = ACustomer.Valid(CustomerFullname, Email, Address, Password, CreatedOn);
@@ -598,7 +598,7 @@ namespace Testing2
             string Error = "";
 
             //create some test data to pass to the test
-            string Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";       //this should trigger an ok
+            string Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com";       //this should trigger an ok
 
             //invoke the method
             Error = ACustomer.Valid(CustomerFullname, Email, Address, Password, CreatedOn);
@@ -617,7 +617,7 @@ namespace Testing2
             string Error = "";
 
             //create some test data to pass to the test
-            string Email = "aaaaaaaaaaaaaaaaaaaaaaaaa";       //this should trigger an ok
+            string Email = "aaaaaaaaaaaaaaa@gmail.com";       //this should trigger an ok
 
             //invoke the method
             Error = ACustomer.Valid(CustomerFullname, Email, Address, Password, CreatedOn);
@@ -636,7 +636,7 @@ namespace Testing2
             string Error = "";
 
             //create some test data to pass to the test
-            string Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";       //this should trigger an ok
+            string Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com";       //this should trigger an ok
 
             //invoke the method
             Error = ACustomer.Valid(CustomerFullname, Email, Address, Password, CreatedOn);
@@ -655,7 +655,7 @@ namespace Testing2
             string Error = "";
 
             //create some test data to pass to the test
-            string Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";       //this should trigger an error
+            string Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com";       //this should trigger an error
 
             //invoke the method
             Error = ACustomer.Valid(CustomerFullname, Email, Address, Password, CreatedOn);

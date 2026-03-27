@@ -1,6 +1,8 @@
 ﻿using System;
 using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Testing1
 {
@@ -48,11 +50,11 @@ namespace Testing1
             // create an instance of the class we want to create
             clsStaffUser AnUser = new clsStaffUser();
             // create some test data to assign to the property
-            String TestData = "password123";
+            String TestData = "cbfdac6008f9cab4083784cbd1874f76618d2a97";
             // assign the data to the property
-            AnUser.Password = TestData;
+            AnUser.PasswordHash = TestData;
             // test to see that the two values are the same
-            Assert.AreEqual(AnUser.Password, TestData);
+            Assert.AreEqual(AnUser.PasswordHash, TestData);
         }
 
         [TestMethod]
@@ -78,6 +80,7 @@ namespace Testing1
             // create some test data to use with the method
             String UserName = "Dawn";
             String Password = "password123";
+
             // invoke the method
             Found = AnUser.FindUser(UserName, Password);
             // test to see if the result is true
@@ -94,12 +97,13 @@ namespace Testing1
             //  create a Boolean variable to record if the data is okay (assume it is)
             Boolean OK = true;
             // create some test data to use with the method
-            string UserName = "Dawn";
+            string UserName = "Gabriel";
             string Password = "password123";
+
             // invoke the method
             Found = AnUser.FindUser(UserName, Password);
             // check the user ID and password properties
-            if (AnUser.UserName != UserName && AnUser.Password != Password)
+            if (AnUser.UserName != UserName)
             {
                 OK = false;
             }

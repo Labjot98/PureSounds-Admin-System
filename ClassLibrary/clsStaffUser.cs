@@ -1,6 +1,8 @@
 ﻿using System;
 using System.CodeDom;
 using System.Security.AccessControl;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ClassLibrary
 {
@@ -10,8 +12,10 @@ namespace ClassLibrary
         private Int32 mUserID;
         // private data member for the user name property
         private string mUserName;
-        // private data member for the password property
-        private string mPassword;
+        // private data member for the password hash
+        private string mPasswordHash;
+        // private data member for the salt
+        private string mSalt;
         // private data mamber for the department property
         private string mDepartment;
 
@@ -42,20 +46,37 @@ namespace ClassLibrary
                 mUserName = value;
             }
         }
-        public string Password
+        public string PasswordHash
         {
             get
             {
                 // return the private data
-                return mPassword;
+                return mPasswordHash;
             }
             set
             {
                 // set the private data
-                mPassword = value;
+                mPasswordHash = value;
             }
 
         }
+        public string Salt
+        {
+            get
+            {
+                // return the private data
+                return mSalt;
+            }
+            set
+            {
+                // set the private data
+                mSalt = value;
+            }
+
+        }
+
+
+
         public string Department
         {
             get
@@ -76,18 +97,43 @@ namespace ClassLibrary
 
             // create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
-            // add the parameters of the user username and password to search for
+            // add the parameters of the user name
             DB.AddParameter("@UserName", UserName);
-            DB.AddParameter("@Password", Password);
-            // execute the stored procedure
-            DB.Execute("sproc_tblUsers_FindUserNamePW");
-            // if one record is found (there should be either one or none)
-            if (DB.Count == 1)
+            // execute the new stored procedure that retrieves an entire record from the username (since we now test the password here in the class method)
+            DB.Execute("sproc_tblUsersSaltedandHashed_FindRecordFromUserName");
+            // If the SQL table for users has no record for this user, log in must terminate before trying process the missing record
+            if (DB.Count == 0)
+            {
+                return false;
+            }
+
+            // Authenticate the password presented by user ...
+            // First get the hash and salt retrieved from the SQL table
+            string retrievedPasswordHash = Convert.ToString(DB.DataTable.Rows[0]["PasswordHash"]);
+            string retrievedSalt = Convert.ToString(DB.DataTable.Rows[0]["Salt"]);
+
+            // set a flag for whether the presented and password and the stored password match
+            bool authenticated = false;
+
+            // create the hash of the presented_password+salt (having retrieved salt from table's record for this user)
+            SHA1 sha1Hash = SHA1.Create();
+            byte[] sourceBytes = Encoding.UTF8.GetBytes(string.Concat(Password, retrievedSalt));
+            byte[] hashBytes = sha1Hash.ComputeHash(sourceBytes);
+            string PasswordHash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+
+            // compare the hash of the presented password (plus salt from table) with hash stored in the table
+            if (PasswordHash == retrievedPasswordHash)
+                {
+                authenticated = true;
+                }
+
+            if ((DB.Count == 1) && (authenticated == true))
             {
                 // copy the data from the database to the private data members
                 mUserID = Convert.ToInt32(DB.DataTable.Rows[0]["UserID"]);
                 mUserName = Convert.ToString(DB.DataTable.Rows[0]["UserName"]);
-                mPassword = Convert.ToString(DB.DataTable.Rows[0]["Password"]);
+                mPasswordHash = Convert.ToString(DB.DataTable.Rows[0]["PasswordHash"]);
+                mSalt = Convert.ToString(DB.DataTable.Rows[0]["Salt"]);
                 mDepartment = Convert.ToString(DB.DataTable.Rows[0]["Department"]);
                 // return true to confirm that everything worked okay
                 return true;

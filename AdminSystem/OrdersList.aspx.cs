@@ -17,6 +17,12 @@ public partial class _1_List : System.Web.UI.Page
             //update the list box
             DisplayOrder();
         }
+        //create a new instance of clsAddressUser
+        clsOrderUser AnUser = new clsOrderUser();
+        //get data from the session object
+        AnUser = (clsOrderUser)Session["AnUser"];
+        //display the user name
+        Response.Write("Logged in as: " + AnUser.UserName);
 
 
     }
@@ -91,6 +97,12 @@ public partial class _1_List : System.Web.UI.Page
         {
             lblError.Text = "Please select an order from the list to delete";
         }
+    }
+
+    protected void btnReturn_Click(object sender, EventArgs e)
+    {
+        //redirect to the main menu
+        Response.Redirect("TeamMainMenu.aspx");
     }
 
     protected void btnApplyFilter_Click(object sender, EventArgs e)

@@ -55,6 +55,7 @@
             <div class="bottom-btn-cont">
                 <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="OK" />
                 <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+                <asp:Button ID="btnReturnToMain" runat="server" OnClick="btnReturn_Click"  Text="Return to List" />
             </div>
 
             <asp:Label ID="lblError" runat="server" ></asp:Label>

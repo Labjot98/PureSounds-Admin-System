@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -26,6 +28,7 @@ public partial class StaffLogin : System.Web.UI.Page
         UserName = Convert.ToString(txtUserName.Text);
         // get the password entered by the user
         Password = Convert.ToString(txtPassword.Text);
+
         // find the record
         Found = AnUser.FindUser(UserName, Password);
         // Add a session to capture the user name
